@@ -2937,6 +2937,31 @@ class PlayState extends MusicBeatState
 			npsCounter.text = 'NPS: ' + nps + '';
 			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% | Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
 		}
+		
+		if(ratingName == '?' && ClientPrefs.scoreTxtType == 'Simple') {
+			npsCounter.text = 'NPS: ' + nps + '';
+			scoreTxt.text = '(' + songScore + ' PTS) (' + songMisses + ' Misses) (' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + ' HP) ' + ratingName;
+		} else if (ClientPrefs.scoreTxtType == 'Simple') {
+			npsCounter.text = 'NPS: ' + nps + '';
+			scoreTxt.text = '(' + songScore + ' PTS) (' + songMisses + ' Misses) (' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + ' HP) ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
+		}
+		
+		if(ratingName == '?' && ClientPrefs.scoreTxtType == 'Advanced') {
+			npsCounter.text = 'NPS: ' + nps + '';
+			scoreTxt.text = 'Rating: ' + ratingName + ' // Combo Breaks: ' + songMisses + ' // Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% // Score: ' + songScore + ' // Accuracy: ' + ratingName + ' // Overall Rating: ' + ratingName;
+		} else if (ClientPrefs.scoreTxtType == 'Advanced') {
+			npsCounter.text = 'NPS: ' + nps + '';
+			scoreTxt.text = 'Rating: ' + ratingName + ' // Combo Breaks: ' + songMisses + ' // Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% // Score: ' + songScore + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% // Overall Rating: ' + ratingFC;
+		}
+		
+		if(ratingName == '?' && ClientPrefs.scoreTxtType == 'Disabled') {
+			npsCounter.text = 'NPS: ' + nps + '';
+			scoreTxt.text = '';
+		} else if (ClientPrefs.scoreTxtType == 'Disabled') {
+			npsCounter.text = 'NPS: ' + nps + '';
+			scoreTxt.text = '';
+		}
+
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;

@@ -3,18 +3,14 @@
 	"difficulties": "Hard",
 	"hideFreeplay": false,
 	"weekBackground": "stage",
+	"weekBefore": "tutorial",
 	"freeplayColor": [
 		146,
 		113,
 		253
 	],
-	"weekBefore": "tutorial",
 	"startUnlocked": true,
-	"weekCharacters": [
-		"",
-		"bf",
-		"gf"
-	],
+	"hideStoryMode": false,
 	"songs": [
 		[
 			"B3 Blammed",
@@ -36,23 +32,28 @@
 		],
 		[
 			"High x Boyfriend",
-			"bf",
+			"coolbf",
 			[
-				83, 
-				171, 
+				83,
+				171,
 				252
 			]
 		],
-		[	"Fresh (Boyfriend Remix)", 
-			"dad", 
+		[
+			"Fresh (Boyfriend Remix)",
+			"dad",
 			[
-				146, 
-				113, 
+				146,
+				113,
 				253
 			]
 		]
 	],
-	"hideStoryMode": false,
-	"weekName": "Bonus Songs",
-	"hiddenUntilUnlocked": false
+	"weekCharacters": [
+		"",
+		"bf",
+		"gf"
+	],
+	"hiddenUntilUnlocked": false,
+	"weekName": "Bonus Songs"
 }

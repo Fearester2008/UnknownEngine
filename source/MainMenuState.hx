@@ -27,7 +27,7 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var unknownEngineVersion:String = '1.1';
+	public static var unknownEngineVersion:String = '1.2';
 	public static var fnfMuVersion:String = '2.0.3';
 	public static var psychEngineVersion:String = '0.6.2'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -46,7 +46,7 @@ class MainMenuState extends MusicBeatState
 		'options'
 	];
 
-	var magenta:FlxSprite;
+	//var magenta:FlxSprite;
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
@@ -103,15 +103,15 @@ class MainMenuState extends MusicBeatState
 		add(checker);
 		checker.scrollFactor.set(0, 0.07);
 
-		magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
-		magenta.scrollFactor.set(0, yScroll);
-		magenta.setGraphicSize(Std.int(magenta.width * 1.175));
-		magenta.updateHitbox();
-		magenta.screenCenter();
-		magenta.visible = false;
-		magenta.antialiasing = ClientPrefs.globalAntialiasing;
-		magenta.color = 0xFFfd719b;
-		add(magenta);
+		//magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
+		//magenta.scrollFactor.set(0, yScroll);
+		//magenta.setGraphicSize(Std.int(magenta.width * 1.175));
+		//magenta.updateHitbox();
+		//magenta.screenCenter();
+		//magenta.visible = false;
+		//magenta.antialiasing = ClientPrefs.globalAntialiasing;
+		//magenta.color = 0xFFfd719b;
+		//add(magenta);
 		
 		// magenta.scrollFactor.set();
 
@@ -206,6 +206,11 @@ class MainMenuState extends MusicBeatState
 
 		if (!selectedSomethin)
 		{
+			if (FlxG.mouse.wheel != 0)
+			{
+				FlxG.sound.play(Paths.sound('scrollMenu'));
+				changeItem(-FlxG.mouse.wheel);
+			}
 			if (controls.UI_UP_P)
 			{
 				FlxG.sound.play(Paths.sound('scrollMenu'));
@@ -225,7 +230,7 @@ class MainMenuState extends MusicBeatState
 				MusicBeatState.switchState(new TitleState());
 			}
 
-			if (controls.ACCEPT)
+			if (controls.ACCEPT || FlxG.mouse.justPressed)
 			{
 				if (optionShit[curSelected] == 'donate')
 				{
@@ -236,7 +241,7 @@ class MainMenuState extends MusicBeatState
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 
-					if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
+					//if(ClientPrefs.flashing) FlxFlicker.flicker(magenta, 1.1, 0.15, false);
 
 					menuItems.forEach(function(spr:FlxSprite)
 					{
