@@ -1,5 +1,5 @@
 # Unknown Engine
- An engine based on Psych Engine but with minor differences, and more features. Some of these features are:
+ An engine based on Psych Engine but with minor differences, and more features. Features of the engine are:
  
 ## All Psych Engine Features
 
