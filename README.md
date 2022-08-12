@@ -15,6 +15,10 @@
 
  ![](https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/menudifficulties/noob.png?raw=true)
  
+ ## Customizable Score Text
+ 
+ ![](https://media.discordapp.net/attachments/1007413452131807362/1007785198596931686/DC49E414-CF5B-4A9C-A8A8-ADE84EC0AE46.jpg)
+ 
 ## Installation:
 You must have [the most up-to-date version of Haxe](https://haxe.org/download/), seriously, stop using 4.1.5, it misses some stuff.
 
