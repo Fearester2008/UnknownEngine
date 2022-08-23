@@ -27,7 +27,7 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var unknownEngineVersion:String = '1.2';
+	public static var unknownEngineVersion:String = '1.3';
 	public static var fnfMuVersion:String = '2.0.3';
 	public static var psychEngineVersion:String = '0.6.2'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -102,6 +102,12 @@ class MainMenuState extends MusicBeatState
 
 		add(checker);
 		checker.scrollFactor.set(0, 0.07);
+		
+		if(ClientPrefs.darkMode) {
+			bg.loadGraphic(Paths.image('menuBGDark'));
+			checker.visible = false;
+			gradientBar.visible = false;
+		}
 
 		//magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
 		//magenta.scrollFactor.set(0, yScroll);

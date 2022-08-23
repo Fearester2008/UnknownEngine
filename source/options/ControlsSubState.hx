@@ -89,6 +89,12 @@ class ControlsSubState extends MusicBeatSubstate {
 
 		add(checker);
 		checker.scrollFactor.set(0, 0.07);
+		
+		if(ClientPrefs.darkMode) {
+			bg.loadGraphic(Paths.image('menuBGDarkO'));
+			checker.visible = false;
+			gradientBar.visible = false;
+		}
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);

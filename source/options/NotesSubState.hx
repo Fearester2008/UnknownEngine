@@ -64,6 +64,12 @@ class NotesSubState extends MusicBeatSubstate
 		add(checker);
 		checker.scrollFactor.set(0, 0.07);
 		
+		if(ClientPrefs.darkMode) {
+			bg.loadGraphic(Paths.image('menuBGDarkO'));
+			checker.visible = false;
+			gradientBar.visible = false;
+		}
+		
 		blackBG = new FlxSprite(posX - 25).makeGraphic(870, 200, FlxColor.BLACK);
 		blackBG.alpha = 0.4;
 		add(blackBG);

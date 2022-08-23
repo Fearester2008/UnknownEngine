@@ -52,6 +52,11 @@ class AchievementsMenuState extends MusicBeatState
 		add(checker);
 		checker.scrollFactor.set(0, 0.07);
 		
+		if(ClientPrefs.darkMode) {
+			menuBG.loadGraphic(Paths.image('menuBGDarkO'));
+			checker.visible = false;
+			gradientBar.visible = false;
+		}
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);

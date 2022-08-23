@@ -260,6 +260,7 @@ class PlayState extends MusicBeatState
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
 
 	public var songScore:Int = 0;
+	public var thScore:Int = 0;
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
 	public var scoreTxt:FlxText;
@@ -2930,7 +2931,10 @@ class PlayState extends MusicBeatState
 		setOnLuas('curDecStep', curDecStep);
 		setOnLuas('curDecBeat', curDecBeat);
 		
-		if(ratingName == '?') {
+		if (cpuControlled) {
+			npsCounter.text = 'NPS: ' + nps + '';
+			scoreTxt.text = 'Score: ' + thScore + ' | Misses: ' + songMisses + ' | Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% | Rating: ' + ratingName;
+		} else if(ratingName == '?') {
 			npsCounter.text = 'NPS: ' + nps + '';
 			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% | Rating: ' + ratingName;
 		} else {
@@ -2938,7 +2942,10 @@ class PlayState extends MusicBeatState
 			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% | Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
 		}
 		
-		if(ratingName == '?' && ClientPrefs.scoreTxtType == 'Simple') {
+		if (cpuControlled && ClientPrefs.scoreTxtType == 'Simple') {
+			npsCounter.text = 'NPS: ' + nps + '';
+			scoreTxt.text = '(' + thScore + ' PTS) (' + songMisses + ' Misses) (' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + ' HP) ' + ratingName;
+		} else if(ratingName == '?' && ClientPrefs.scoreTxtType == 'Simple') {
 			npsCounter.text = 'NPS: ' + nps + '';
 			scoreTxt.text = '(' + songScore + ' PTS) (' + songMisses + ' Misses) (' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + ' HP) ' + ratingName;
 		} else if (ClientPrefs.scoreTxtType == 'Simple') {
@@ -2946,7 +2953,10 @@ class PlayState extends MusicBeatState
 			scoreTxt.text = '(' + songScore + ' PTS) (' + songMisses + ' Misses) (' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + ' HP) ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
 		}
 		
-		if(ratingName == '?' && ClientPrefs.scoreTxtType == 'Advanced') {
+		if (cpuControlled && ClientPrefs.scoreTxtType == 'Advanced') {
+			npsCounter.text = 'NPS: ' + nps + '';
+			scoreTxt.text = 'Rating: ' + ratingName + ' // Combo Breaks: ' + songMisses + ' // Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% // Score: ' + thScore + ' // Accuracy: ' + ratingName + ' // Overall Rating: ' + ratingName;
+		} else if(ratingName == '?' && ClientPrefs.scoreTxtType == 'Advanced') {
 			npsCounter.text = 'NPS: ' + nps + '';
 			scoreTxt.text = 'Rating: ' + ratingName + ' // Combo Breaks: ' + songMisses + ' // Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% // Score: ' + songScore + ' // Accuracy: ' + ratingName + ' // Overall Rating: ' + ratingName;
 		} else if (ClientPrefs.scoreTxtType == 'Advanced') {
@@ -4051,6 +4061,13 @@ class PlayState extends MusicBeatState
 		{
 			spawnNoteSplashOnNote(note);
 		}
+		
+		thScore += 350;
+		if(!practiceMode && !cpuControlled) {
+			songScore += score;
+			if(!note.ratingDisabled)
+				songHits++;
+		}
 
 		if(!practiceMode && !cpuControlled) {
 			songScore += score;
@@ -4417,6 +4434,8 @@ class PlayState extends MusicBeatState
 		if(!practiceMode) songScore -= 10;
 
 		totalPlayed++;
+		if (!daNote.hitCausesMiss)
+			thScore += 350;
 		RecalculateRating(true);
 
 		var char:Character = boyfriend;

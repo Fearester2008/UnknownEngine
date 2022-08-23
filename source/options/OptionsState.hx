@@ -31,7 +31,7 @@ using StringTools;
 
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay'];
+	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay', 'Enter Rest Mode'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -53,6 +53,8 @@ class OptionsState extends MusicBeatState
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
 				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
+			case 'Enter Rest Mode':
+				LoadingState.loadAndSwitchState(new options.SleepModeState());
 		}
 	}
 
@@ -82,6 +84,12 @@ class OptionsState extends MusicBeatState
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
+		
+		if(ClientPrefs.darkMode) {
+			bg.loadGraphic(Paths.image('menuBGDarkO'));
+			checker.visible = false;
+			gradientBar.visible = false;
+		}
 
 		for (i in 0...options.length)
 		{
