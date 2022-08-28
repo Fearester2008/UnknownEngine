@@ -74,11 +74,24 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		add(checker);
 		checker.scrollFactor.set(0, 0.07);
 		
-		if(ClientPrefs.darkMode) {
+		if(ClientPrefs.menuTheme == 'Dark') {
 			bg.loadGraphic(Paths.image('menuBGDarkO'));
 			checker.visible = false;
 			gradientBar.visible = false;
 		}
+		
+		if(ClientPrefs.menuTheme == 'Time of Day') {
+            var hours:Int = Date.now().getHours();
+            if(hours > 18) {
+                bg.loadGraphic(Paths.image('menuBGDarkO'));
+				checker.visible = false;
+				gradientBar.visible = false;
+            } else if(hours > 8) {
+                bg.loadGraphic(Paths.image('menuOption'));
+				checker.visible = true;
+				gradientBar.visible = true;
+            }
+        }
 
 		// avoids lagspikes while scrolling through menus!
 		grpOptions = new FlxTypedGroup<Alphabet>();

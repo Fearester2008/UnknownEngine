@@ -103,11 +103,24 @@ class MainMenuState extends MusicBeatState
 		add(checker);
 		checker.scrollFactor.set(0, 0.07);
 		
-		if(ClientPrefs.darkMode) {
+		if(ClientPrefs.menuTheme == 'Dark') {
 			bg.loadGraphic(Paths.image('menuBGDark'));
 			checker.visible = false;
 			gradientBar.visible = false;
 		}
+		
+		if(ClientPrefs.menuTheme == 'Time of Day') {
+            var hours:Int = Date.now().getHours();
+            if(hours > 18) {
+                bg.loadGraphic(Paths.image('menuBGDark'));
+				checker.visible = false;
+				gradientBar.visible = false;
+            } else if(hours > 8) {
+                bg.loadGraphic(Paths.image('menuBG'));
+				checker.visible = true;
+				gradientBar.visible = true;
+            }
+        }
 
 		//magenta = new FlxSprite(-80).loadGraphic(Paths.image('menuDesat'));
 		//magenta.scrollFactor.set(0, yScroll);

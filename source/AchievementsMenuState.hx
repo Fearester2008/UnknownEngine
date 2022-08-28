@@ -52,11 +52,24 @@ class AchievementsMenuState extends MusicBeatState
 		add(checker);
 		checker.scrollFactor.set(0, 0.07);
 		
-		if(ClientPrefs.darkMode) {
+		if(ClientPrefs.menuTheme == 'Dark') {
 			menuBG.loadGraphic(Paths.image('menuBGDarkO'));
 			checker.visible = false;
 			gradientBar.visible = false;
 		}
+		
+		if(ClientPrefs.menuTheme == 'Time of Day') {
+            var hours:Int = Date.now().getHours();
+            if(hours > 18) {
+                menuBG.loadGraphic(Paths.image('menuBGDarkO'));
+				checker.visible = false;
+				gradientBar.visible = false;
+            } else if(hours > 8) {
+                menuBG.loadGraphic(Paths.image('menuBGBlue'));
+				checker.visible = true;
+				gradientBar.visible = true;
+            }
+        }
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);

@@ -24,11 +24,18 @@ class FlashingState extends MusicBeatState
 		add(bg);
 
 		warnText = new FlxText(0, 0, FlxG.width,
-			"Hey, watch out!\n
-			This Mod contains some flashing lights!\n
+			"WARNING:\n
+			\n
+			FNF: Unknown Engine may potentially trigger seizures for people with photosensitive epilepsy. Viewer discretion is advised.\n
+			\n
+			FNF: Unknown Engine is a non-profit modification, aimed for entertainment purposes, and wasn't meant to be an attack on Ninjamuffin99\n
+			and/or any other modmakers out there. We were not aiming for replacing what Friday Night Funkin' was, is and will.\n
+			It was made for fun and from the love for the game itself. All of the comparisons between this and other mods are purely coincidental, unless stated otherwise.\n
+			\n
+			Now with that out of the way, We hope you'll enjoy this FNF mod.\n
+			Funk all the way.\n
 			Press ENTER to disable them now or go to Options Menu.\n
-			Press ESCAPE to ignore this message.\n
-			You've been warned!",
+			Press ESCAPE to ignore this message.",
 			32);
 		warnText.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);

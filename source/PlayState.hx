@@ -193,6 +193,7 @@ class PlayState extends MusicBeatState
 	private var updateTime:Bool = true;
 	public static var changedDifficulty:Bool = false;
 	public static var chartingMode:Bool = false;
+	
 
 	//Gameplay settings
 	public var healthGain:Float = 1;
@@ -203,7 +204,9 @@ class PlayState extends MusicBeatState
 
 	public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
-
+	public var chartingSine:Float = 0;
+	public var chartingModeTxt:FlxText;
+	
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
 	public var camHUD:FlxCamera;
@@ -1218,7 +1221,7 @@ class PlayState extends MusicBeatState
 		versionTxt.scrollFactor.set();
 		add(versionTxt);
 
-		botplayTxt = new FlxText(955, timeBarBG.y + 670, FlxG.width - 800, "Botplay is enabled.", 32);
+		botplayTxt = new FlxText(850, timeBarBG.y + 670, FlxG.width - 800, "Botplay is enabled, Score won't be saved.", 32);
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
@@ -1226,6 +1229,15 @@ class PlayState extends MusicBeatState
 		add(botplayTxt);
 		if(ClientPrefs.downScroll) {
 			botplayTxt.y = timeBarBG.y - 675;
+		}
+		
+		chartingModeTxt = new FlxText(850, timeBarBG.y + 670, FlxG.width - 800, "", 32);
+		chartingModeTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		chartingModeTxt.scrollFactor.set();
+		chartingModeTxt.borderSize = 1.25;
+		chartingModeTxt.visible = cpuControlled;
+		if(ClientPrefs.downScroll) {
+			chartingModeTxt.y = 675;
 		}
 
 		strumLineNotes.cameras = [camHUD];
@@ -1238,6 +1250,7 @@ class PlayState extends MusicBeatState
 		scoreTxt.cameras = [camHUD];
 		versionTxt.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
+		chartingModeTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
@@ -2977,6 +2990,11 @@ class PlayState extends MusicBeatState
 			botplaySine += 180 * elapsed;
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
 		}
+		
+		if(chartingModeTxt.visible) {
+			chartingSine += 180;
+			chartingModeTxt.alpha = 1 - Math.sin((Math.PI * chartingSine) / 180);
+		}
 
 		if (controls.PAUSE && startedCountdown && canPause)
 		{
@@ -3903,8 +3921,18 @@ class PlayState extends MusicBeatState
 			{
 				openChartEditor();
 				return;
+						
+				add(chartingModeTxt);
+				chartingModeTxt.text = "Player used charter, Score won't be saved.";
 			}
-
+			else if (chartingMode && cpuControlled)
+			{
+				openChartEditor();
+				return;
+						
+				chartingModeTxt.visible = false;
+				botplayTxt.text = "Botplay & Charter enabled, Score not saved.";
+			}
 			if (isStoryMode)
 			{
 				campaignScore += songScore;

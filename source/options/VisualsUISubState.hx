@@ -64,11 +64,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			['Default', 'Simple', 'Advanced', 'Disabled']);
 		addOption(option);
 		
-		var option:Option = new Option('Dark Mode',
-			'Try not to burn your eyes, okay?',
-			'darkMode',
-			'bool',
-			false);
+		var option:Option = new Option('Menu Themes:',
+			'What theme should the menu be?',
+			'menuTheme',
+			'string',
+			'Light',
+			['Light', 'Dark', 'Time of Day']);
 		addOption(option);
 
 		var option:Option = new Option('Flashing Lights',
