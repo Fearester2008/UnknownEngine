@@ -1,36 +1,28 @@
-# Unknown Engine
- An engine based on Psych Engine but with minor differences, and more features. Some of these features are:
+<p align="center">
+	<a href="https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/titlelogo.png" target="_blank"><img src="/assets/preload/images/titlelogo.png"></a>
+</p>
 
- ## Randomized Loading Screens
- ![](https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/loadingScreens/loadingscreen-1.png?raw=true)
+# This is the repository for Friday Night Funkin': Unknown Engine, an engine built off of [Psych Engine.](https://github.com/ShadowMario/FNF-PsychEngine)
 
- ## Winning Icons for every character (450x150)
- ![](https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/icons/icon-bf.png?raw=true)
-
- ## Insane/Expert/Noob difficulties (Inspired by Mic'd Up engine)
-
- ![](https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/menudifficulties/expert.png?raw=true)
-
- ![](https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/menudifficulties/noob.png?raw=true)
+Support Funkin' on [Newgrounds](https://www.newgrounds.com/portal/view/770371), [GitHub](https://github.com/ninjamuffin99/Funkin), and [Itch.io](https://ninja-muffin24.itch.io/funkin)!
  
-# Friday Night Funkin' - Psych Engine
-Engine originally used on [Mind Games Mod](https://gamebanana.com/mods/301107), intended to be a fix for the vanilla version's many issues while keeping the casual play aspect of it. Also aiming to be an easier alternative to newbie coders.
+## Credits
+* LeonGamer - Coding
+* aegislash81 - Assistant Coding 
+* nglmadison - Beta Testing
 
-## Installation:
-You must have [the most up-to-date version of Haxe](https://haxe.org/download/), seriously, stop using 4.1.5, it misses some stuff.
-
-Follow a Friday Night Funkin' source code compilation tutorial, after this you will need to install LuaJIT.
-
-To install LuaJIT do this: `haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit ` on a Command prompt/PowerShell
-
-...Or if you don't want your mod to be able to run .lua scripts, delete the "LUA_ALLOWED" line on Project.xml
-
-## Credits:
-* Shadow Mario - Coding
-* RiverOaken - Arts and Animations
+## Psych Engine
+* Shadow Mario - Coding for Psych Engine
+* RiverOaken - Arts and Animations for Psych Engine
 * bbpanzu - Assistant Coding
 
+## Mic'd Up
+* Verwex - Mic'd Up itself
+* KadeDev - Additional Programmer
+* Ash237 - Additional Programmer
+
 ### Special Thanks
+* ItJforJadeppn - Dark Mode option and Rest Mode
 * shubs - New Input System
 * SqirraRNG - Chart Editor's Sound Waveform base code
 * iFlicky - Delay/Combo Menu Song Composer + Dialogue Sounds
@@ -39,73 +31,66 @@ To install LuaJIT do this: `haxelib git linc_luajit https://github.com/AndreiRud
 * Smokey - Spritemap Texture Atlas support
 * Cary - OG Resolution code
 * Nebula_Zorua - VCR Shader code
-_____________________________________
 
-# Features
+<p align="center">
+	<a href="https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/intrologo.png" target="_blank"><img src="/assets/preload/images/intrologo.png"></a>
+</p>
+ 
+# Compiling
 
-## Attractive animated dialogue boxes:
+## What can I do with compiling the mod? Why should I compile the mod instead of downloading it from [the GameBanana page of the mod](https://gamebanana.com/mods/383504)?
 
-![](https://user-images.githubusercontent.com/44785097/127706669-71cd5cdb-5c2a-4ecc-871b-98a276ae8070.gif)
+Compiling the mod gives access to the `/source` folder, allowing you to change the code of the mod. You can add a lot of cool things with the open-source code!
 
+I recommend having a good idea on how to program. Compiling the mod is not for everyone!
 
-## Mod Support
-* Probably one of the main points of this engine, you can code in .lua files outside of the source code, making your own weeks without even messing with the source!
-* Comes with a Mod Organizing/Disabling Menu. 
+If you just want to download and play the mod normally, you can click [here to go to the GameBanana page of the mod](https://gamebanana.com/mods/383504)!
 
+### **If you do want to compile, continue reading!**
 
-## Atleast one change to every week:
-### Week 1:
-  * New Dad Left sing sprite 
-  * Unused stage lights are now used
-### Week 2:
-  * Both BF and Skid & Pump does "Hey!" animations
-  * Thunders does a quick light flash and zooms the camera in slightly
-  * Added a quick transition/cutscene to Monster
-### Week 3:
-  * BF does "Hey!" during Philly Nice
-  * Blammed has a cool new colors flash during that sick part of the song
-### Week 4:
-  * Better hair physics for Mom/Boyfriend (Maybe even slightly better than Week 7's :eyes:)
-  * Henchmen die during all songs. Yeah :(
-### Week 5:
-  * Bottom Boppers and GF does "Hey!" animations during Cocoa and Eggnog
-  * On Winter Horrorland, GF bops her head slower in some parts of the song.
-### Week 6:
-  * On Thorns, the HUD is hidden during the cutscene
-  * Also there's the Background girls being spooky during the "Hey!" parts of the Instrumental
+### Installing the Required Programs
 
-## Cool new Chart Editor changes and countless bug fixes
-![](https://github.com/ShadowMario/FNF-PsychEngine/blob/main/docs/img/chart.png?raw=true)
-* You can now chart "Event" notes, which are bookmarks that trigger specific actions that usually were hardcoded on the vanilla version of the game.
-* Your song's BPM can now have decimal values
-* You can manually adjust a Note's strum time if you're really going for milisecond precision
-* You can change a note's type on the Editor, it comes with two example types:
-  * Alt Animation: Forces an alt animation to play, useful for songs like Ugh/Stress
-  * Hey: Forces a "Hey" animation instead of the base Sing animation, if Boyfriend hits this note, Girlfriend will do a "Hey!" too.
+First, you need to install Haxe and HaxeFlixel. I'm too lazy to write and keep updated with that setup (which is pretty simple). 
+1. [Install Haxe](https://haxe.org/download/) (Download the latest vversion, seriously, stop using 4.1.5, it misses some stuff.)
+2. [Install HaxeFlixel](https://haxeflixel.com/documentation/install-haxeflixel/) after downloading Haxe
 
-## Multiple editors to assist you in making your own Mod
-![Screenshot_3](https://user-images.githubusercontent.com/44785097/144629914-1fe55999-2f18-4cc1-bc70-afe616d74ae5.png)
-* Working both for Source code modding and Downloaded builds!
+Other installations you'd need are the additional libraries, a fully updated list will be in `Project.xml` in the project root. Currently, these are all of the things you need to install:
+```
+flixel
+flixel-addons
+flixel-ui
+hscript
+newgrounds
+```
+So for each of those type `haxelib install [library]` so shit like `haxelib install newgrounds`
 
-## Story mode menu rework:
-![](https://i.imgur.com/UB2EKpV.png)
-* Added a different BG to every song (less Tutorial)
-* All menu characters are now in individual spritesheets, makes modding it easier.
+You'll also need to install a couple things that involve Gits. To do this, you need to do a few things first.
+1. Download [git-scm](https://git-scm.com/downloads). Works for Windows, Mac, and Linux, just select your build.
+2. Follow instructions to install the application properly.
+3. Run `haxelib git polymod https://github.com/larsiusprime/polymod.git` to install Polymod.
+4. Run `haxelib git discord_rpc https://github.com/Aidan63/linc_discord-rpc` to install Discord RPC.
 
-## Credits menu
-![Screenshot_1](https://user-images.githubusercontent.com/44785097/144632635-f263fb22-b879-4d6b-96d6-865e9562b907.png)
-* You can add a head icon, name, description and a Redirect link for when the player presses Enter while the item is currently selected.
+You also need to install LuaJIT. If you don't want your mod to run .lua scripts, delete the "LUA_ALLOWED" line on Project.xml.
+Run `haxelib git linc_luajit https://github.com/AndreiRudenko/linc_luajit` to install LuaJIT.
 
-## Awards/Achievements
-* The engine comes with 16 example achievements that you can mess with and learn how it works (Check Achievements.hx and search for "checkForAchievement" on PlayState.hx)
+You should have everything ready for compiling the game! Follow the guide below to continue!
 
-## Options menu:
-* You can change Note colors, Delay and Combo Offset, Controls and Preferences there.
- * On Preferences you can toggle Downscroll, Middlescroll, Anti-Aliasing, Framerate, Low Quality, Note Splashes, Flashing Lights, etc.
+At the moment, you can optionally fix the transition bug in songs with zoomed-out cameras.
+- Run `haxelib git flixel-addons https://github.com/HaxeFlixel/flixel-addons` in the terminal/command-prompt.
 
-## Other gameplay features:
-* When the enemy hits a note, their strum note also glows.
-* Lag doesn't impact the camera movement and player icon scaling anymore.
-* Some stuff based on Week 7's changes has been put in (Background colors on Freeplay, Note splashes)
-* You can reset your Score on Freeplay/Story Mode by pressing Reset button.
-* You can listen to a song or adjust Scroll Speed/Damage taken/etc. on Freeplay by pressing Space.
+### Compiling game
+NOTE: If you see any messages relating to deprecated packages, ignore them. They're just warnings that don't affect compiling
+
+Once you have all those installed, it's pretty easy to compile the game. You just need to run `lime test html5 -debug` in the root of the project to build and run the HTML5 version. (command prompt navigation guide can be found here: [https://ninjamuffin99.newgrounds.com/news/post/1090480](https://ninjamuffin99.newgrounds.com/news/post/1090480))
+To run it from your desktop (Windows, Mac, Linux) it can be a bit more involved. For Linux, you only need to open a terminal in the project directory and run `lime test linux -debug` and then run the executable file in export/release/linux/bin. For Windows, you need to install Visual Studio Community 2019. While installing VSC, don't click on any of the options to install workloads. Instead, go to the individual components tab and choose the following:
+* MSVC v142 - VS 2019 C++ x64/x86 build tools
+* Windows SDK (10.0.17763.0)
+
+Once that is done you can open up a command line in the project's directory and run `lime test windows -debug`. Once that command finishes (it takes forever even on a higher end PC), you can run FNF from the .exe file under export\release\windows\bin
+As for Mac, 'lime test mac -debug' should work, if not the internet surely has a guide on how to compile Haxe stuff for Mac.
+
+### Additional guides
+
+- [Command line basics](https://ninjamuffin99.newgrounds.com/news/post/1090480)
+
+ 
