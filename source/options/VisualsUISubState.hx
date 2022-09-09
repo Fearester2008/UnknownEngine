@@ -56,20 +56,40 @@ class VisualsUISubState extends BaseOptionsMenu
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
 		
+		//var option:Option = new Option('Loading Screen:',
+			//"What should the Loading Screens be?",
+			//'loadScreen',
+			//'string',
+			//'Default',
+			//['Default', 'Old', 'Disabled']);
+		//addOption(option);
+		
 		var option:Option = new Option('HUD Type:',
 			"What type should the HUD be?",
 			'scoreTxtType',
 			'string',
 			'Default',
-			['Default', 'Simple', 'Advanced', 'Disabled']);
+			['Default', 'Simple', 'Advanced', 'Mic\'d Up', 'Disabled']);
 		addOption(option);
 		
-		var option:Option = new Option('Menu Themes:',
+		var option:Option = new Option('Menu Theme:',
 			'What theme should the menu be?',
 			'menuTheme',
 			'string',
 			'Light',
-			['Light', 'Dark', 'Time of Day']);
+			['Light', 'Dark', 'Vanilla', 'Time of Day']);
+		addOption(option);
+		
+		var option:Option = new Option('Lane Underlay Opacity',
+			'How opaque should be a black underlay for note lanes.',
+			'laneUnderlayOpacity',
+			'percent',
+			0);
+		option.scrollSpeed = 1.6;
+		option.minValue = 0.0;
+		option.maxValue = 1;
+		option.changeValue = 0.1;
+		option.decimals = 1;
 		addOption(option);
 
 		var option:Option = new Option('Flashing Lights',

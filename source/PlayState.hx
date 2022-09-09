@@ -81,7 +81,7 @@ class PlayState extends MusicBeatState
 		['D', 0.5], //From 40% to 49%
 		['C', 0.6], //From 50% to 59%
 		['B', 0.69], //From 60% to 68%
-		['funni', 0.7], //69%
+		['funni', 0.7], //69% haha so funni
 		['A-', 0.8], //From 70% to 79%
 		['A', 0.84], //From 80% to 83%
 		['A+', 0.9], //From 84% to 89%
@@ -95,6 +95,7 @@ class PlayState extends MusicBeatState
 		['X', 1], //99%
 		['PERFECT!!', 1] //The value on this one isn't used actually, since Perfect is always "1"
 	];
+
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
 	public var modchartSprites:Map<String, ModchartSprite> = new Map<String, ModchartSprite>();
 	public var modchartTimers:Map<String, FlxTimer> = new Map<String, FlxTimer>();
@@ -152,6 +153,9 @@ class PlayState extends MusicBeatState
 	public var eventNotes:Array<EventNote> = [];
 
 	private var strumLine:FlxSprite;
+	
+	public var playerLaneUnderlay:FlxSprite;
+	public var opponentLaneUnderlay:FlxSprite;
 
 	//Handles the new epic mega sexy cam code that i've done
 	public var camFollow:FlxPoint;
@@ -182,6 +186,7 @@ class PlayState extends MusicBeatState
 	public var timeBar:FlxBar;
 
 	public var ratingsData:Array<Rating> = [];
+	//public var perfects:Int = 0;
 	public var sicks:Int = 0;
 	public var goods:Int = 0;
 	public var bads:Int = 0;
@@ -204,8 +209,6 @@ class PlayState extends MusicBeatState
 
 	public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
-	public var chartingSine:Float = 0;
-	public var chartingModeTxt:FlxText;
 	
 	public var iconP1:HealthIcon;
 	public var iconP2:HealthIcon;
@@ -341,6 +344,14 @@ class PlayState extends MusicBeatState
 		//Ratings
 		ratingsData.push(new Rating('sick')); //default rating
 
+		/**
+		var rating:Rating = new Rating('sick');
+		rating.ratingMod = 1;
+		rating.score = 350;
+		rating.noteSplash = true;
+		ratingsData.push(rating);
+		**/
+
 		var rating:Rating = new Rating('good');
 		rating.ratingMod = 0.7;
 		rating.score = 200;
@@ -358,7 +369,7 @@ class PlayState extends MusicBeatState
 		rating.score = 50;
 		rating.noteSplash = false;
 		ratingsData.push(rating);
-
+		
 		// For the "Just the Two of Us" achievement
 		for (i in 0...keysArray.length)
 		{
@@ -1013,6 +1024,18 @@ class PlayState extends MusicBeatState
 		strumLine = new FlxSprite(ClientPrefs.middleScroll ? STRUM_X_MIDDLESCROLL : STRUM_X, 50).makeGraphic(FlxG.width, 10);
 		if(ClientPrefs.downScroll) strumLine.y = FlxG.height - 150;
 		strumLine.scrollFactor.set();
+		
+		playerLaneUnderlay = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
+		playerLaneUnderlay.alpha = ClientPrefs.laneUnderlayOpacity;
+		playerLaneUnderlay.color = FlxColor.BLACK;
+		playerLaneUnderlay.scrollFactor.set();
+		add(playerLaneUnderlay);
+		opponentLaneUnderlay = new FlxSprite(0, 0).makeGraphic(110 * 4 + 50, FlxG.height * 2);
+		opponentLaneUnderlay.alpha = ClientPrefs.laneUnderlayOpacity;
+		opponentLaneUnderlay.color = FlxColor.BLACK;
+		opponentLaneUnderlay.scrollFactor.set();
+		if (!ClientPrefs.middleScroll)
+			add(opponentLaneUnderlay);
 
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
@@ -1194,6 +1217,8 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 		
+		
+		
 		npsCounter = new FlxText(20, FlxG.height - 390, 0);
 		npsCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		npsCounter.borderSize = 2;
@@ -1230,15 +1255,6 @@ class PlayState extends MusicBeatState
 		if(ClientPrefs.downScroll) {
 			botplayTxt.y = timeBarBG.y - 675;
 		}
-		
-		chartingModeTxt = new FlxText(850, timeBarBG.y + 670, FlxG.width - 800, "", 32);
-		chartingModeTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.RED, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		chartingModeTxt.scrollFactor.set();
-		chartingModeTxt.borderSize = 1.25;
-		chartingModeTxt.visible = cpuControlled;
-		if(ClientPrefs.downScroll) {
-			chartingModeTxt.y = 675;
-		}
 
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
@@ -1250,10 +1266,11 @@ class PlayState extends MusicBeatState
 		scoreTxt.cameras = [camHUD];
 		versionTxt.cameras = [camHUD];
 		botplayTxt.cameras = [camHUD];
-		chartingModeTxt.cameras = [camHUD];
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
+		playerLaneUnderlay.cameras = [camHUD];
+		opponentLaneUnderlay.cameras = [camHUD];
 		doof.cameras = [camHUD];
 
 		// if (SONG.song == 'South')
@@ -2014,6 +2031,10 @@ class PlayState extends MusicBeatState
 
 			generateStaticArrows(0);
 			generateStaticArrows(1);
+			playerLaneUnderlay.x = playerStrums.members[0].x - 25;
+			playerLaneUnderlay.screenCenter(Y);
+			opponentLaneUnderlay.x = opponentStrums.members[0].x - 25;
+			opponentLaneUnderlay.screenCenter(Y);
 			for (i in 0...playerStrums.length) {
 				setOnLuas('defaultPlayerStrumX' + i, playerStrums.members[i].x);
 				setOnLuas('defaultPlayerStrumY' + i, playerStrums.members[i].y);
@@ -2218,7 +2239,7 @@ class PlayState extends MusicBeatState
 	}
 	
 	public function updateScore(miss:Bool = false)
-	{
+	{		
 		if(ClientPrefs.scoreZoom && !miss && !cpuControlled)
 		{
 			if(scoreTxtTween != null) {
@@ -2946,42 +2967,53 @@ class PlayState extends MusicBeatState
 		
 		if (cpuControlled) {
 			npsCounter.text = 'NPS: ' + nps + '';
-			scoreTxt.text = 'Score: ' + thScore + ' | Misses: ' + songMisses + ' | Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% | Rating: ' + ratingName;
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
+			scoreTxt.text = 'Score: 0 (' + thScore + ') | Misses: ' + songMisses + ' | Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% | Rating: ' + ratingName;
 		} else if(ratingName == '?') {
 			npsCounter.text = 'NPS: ' + nps + '';
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% | Rating: ' + ratingName;
 		} else {
 			npsCounter.text = 'NPS: ' + nps + '';
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% | Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
 		}
 		
 		if (cpuControlled && ClientPrefs.scoreTxtType == 'Simple') {
 			npsCounter.text = 'NPS: ' + nps + '';
-			scoreTxt.text = '(' + thScore + ' PTS) (' + songMisses + ' Misses) (' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + ' HP) ' + ratingName;
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
+			scoreTxt.text = '([0] ' + thScore + ' PTS) (' + songMisses + ' Misses) (' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + ' HP) ' + ratingName;
 		} else if(ratingName == '?' && ClientPrefs.scoreTxtType == 'Simple') {
 			npsCounter.text = 'NPS: ' + nps + '';
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = '(' + songScore + ' PTS) (' + songMisses + ' Misses) (' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + ' HP) ' + ratingName;
 		} else if (ClientPrefs.scoreTxtType == 'Simple') {
 			npsCounter.text = 'NPS: ' + nps + '';
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = '(' + songScore + ' PTS) (' + songMisses + ' Misses) (' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + ' HP) ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
 		}
 		
 		if (cpuControlled && ClientPrefs.scoreTxtType == 'Advanced') {
 			npsCounter.text = 'NPS: ' + nps + '';
-			scoreTxt.text = 'Rating: ' + ratingName + ' // Combo Breaks: ' + songMisses + ' // Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% // Score: ' + thScore + ' // Accuracy: ' + ratingName + ' // Overall Rating: ' + ratingName;
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
+			scoreTxt.text = 'Rating: ' + ratingName + ' // Combo Breaks: ' + songMisses + ' // Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% // Score: 0 (' + thScore + ') // Accuracy: ' + ratingName + ' // Overall Rating: ' + ratingName;
 		} else if(ratingName == '?' && ClientPrefs.scoreTxtType == 'Advanced') {
 			npsCounter.text = 'NPS: ' + nps + '';
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = 'Rating: ' + ratingName + ' // Combo Breaks: ' + songMisses + ' // Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% // Score: ' + songScore + ' // Accuracy: ' + ratingName + ' // Overall Rating: ' + ratingName;
 		} else if (ClientPrefs.scoreTxtType == 'Advanced') {
 			npsCounter.text = 'NPS: ' + nps + '';
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = 'Rating: ' + ratingName + ' // Combo Breaks: ' + songMisses + ' // Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% // Score: ' + songScore + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% // Overall Rating: ' + ratingFC;
 		}
 		
 		if(ratingName == '?' && ClientPrefs.scoreTxtType == 'Disabled') {
 			npsCounter.text = 'NPS: ' + nps + '';
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = '';
 		} else if (ClientPrefs.scoreTxtType == 'Disabled') {
 			npsCounter.text = 'NPS: ' + nps + '';
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = '';
 		}
 
@@ -2989,11 +3021,6 @@ class PlayState extends MusicBeatState
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
 			botplayTxt.alpha = 1 - Math.sin((Math.PI * botplaySine) / 180);
-		}
-		
-		if(chartingModeTxt.visible) {
-			chartingSine += 180;
-			chartingModeTxt.alpha = 1 - Math.sin((Math.PI * chartingSine) / 180);
 		}
 
 		if (controls.PAUSE && startedCountdown && canPause)
@@ -3030,21 +3057,33 @@ class PlayState extends MusicBeatState
 			
 		healthPercentageDisplay = health / 0.02;
 
-		// Player 1
-		if (healthBar.percent < 20)
-		iconP1.animation.curAnim.curFrame = 1;
-		else if (healthBar.percent > 85)
-		iconP1.animation.curAnim.curFrame = 2;
-		else
-		iconP1.animation.curAnim.curFrame = 0;
-
-		// Player 2
-		if (healthBar.percent > 85)
-		iconP2.animation.curAnim.curFrame = 1;
-		else if (healthBar.percent < 20)
-		iconP2.animation.curAnim.curFrame = 2;
-		else
-		iconP2.animation.curAnim.curFrame = 0;
+		if (iconP1.animation.frames == 3) {
+			if (healthBar.percent < 20)
+				iconP1.animation.curAnim.curFrame = 1;
+			else if (healthBar.percent >80)
+				iconP1.animation.curAnim.curFrame = 2;
+			else
+				iconP1.animation.curAnim.curFrame = 0;
+		} 
+		else {
+			if (healthBar.percent < 20)
+				iconP1.animation.curAnim.curFrame = 1;
+			else
+				iconP1.animation.curAnim.curFrame = 0;
+		}
+		if (iconP2.animation.frames == 3) {
+			if (healthBar.percent > 80)
+				iconP2.animation.curAnim.curFrame = 1;
+			else if (healthBar.percent < 20)
+				iconP2.animation.curAnim.curFrame = 2;
+			else 
+				iconP2.animation.curAnim.curFrame = 0;
+		} else {
+			if (healthBar.percent > 80)
+				iconP2.animation.curAnim.curFrame = 1;
+			else 
+				iconP2.animation.curAnim.curFrame = 0;
+		}
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
 			persistentUpdate = false;
@@ -3921,18 +3960,9 @@ class PlayState extends MusicBeatState
 			{
 				openChartEditor();
 				return;
-						
-				add(chartingModeTxt);
-				chartingModeTxt.text = "Player used charter, Score won't be saved.";
+				
 			}
-			else if (chartingMode && cpuControlled)
-			{
-				openChartEditor();
-				return;
-						
-				chartingModeTxt.visible = false;
-				botplayTxt.text = "Botplay & Charter enabled, Score not saved.";
-			}
+			
 			if (isStoryMode)
 			{
 				campaignScore += songScore;
@@ -5160,6 +5190,7 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
+			//if (perfs > 0) ratingFC = "MFC";
 			if (sicks > 0) ratingFC = "SFC";
 			if (goods > 0) ratingFC = "GFC";
 			if (bads > 0 || shits > 0) ratingFC = "FC";
@@ -5169,7 +5200,7 @@ class PlayState extends MusicBeatState
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
 		setOnLuas('ratingFC', ratingFC);
-		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
+					judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 	}
 
 	#if ACHIEVEMENTS_ALLOWED
@@ -5259,4 +5290,5 @@ class PlayState extends MusicBeatState
 
 	var curLight:Int = -1;
 	var curLightEvent:Int = -1;
+	
 }

@@ -27,7 +27,7 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var unknownEngineVersion:String = '1.3';
+	public static var unknownEngineVersion:String = '1.4';
 	public static var fnfMuVersion:String = '2.0.3';
 	public static var psychEngineVersion:String = '0.6.2'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -105,6 +105,12 @@ class MainMenuState extends MusicBeatState
 		
 		if(ClientPrefs.menuTheme == 'Dark') {
 			bg.loadGraphic(Paths.image('menuBGDark'));
+			checker.visible = false;
+			gradientBar.visible = false;
+		}
+				
+		if(ClientPrefs.menuTheme == 'Vanilla') {
+			bg.loadGraphic(Paths.image('menuBGVanilla'));
 			checker.visible = false;
 			gradientBar.visible = false;
 		}

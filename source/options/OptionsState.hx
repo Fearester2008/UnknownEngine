@@ -35,6 +35,7 @@ class OptionsState extends MusicBeatState
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
+	static var goToPlayState:Bool = false;
 	
 	var checker:FlxBackdrop = new FlxBackdrop(Paths.image('checkerOption'), 0.2, 0.2, true, true);
 	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 300, 0xFFAA00AA);
@@ -56,6 +57,13 @@ class OptionsState extends MusicBeatState
 			case 'Enter Rest Mode':
 				LoadingState.loadAndSwitchState(new options.SleepModeState());
 		}
+	}
+
+	public function new(?goToPlayState:Bool)
+	{
+		super();
+		if (goToPlayState != null)
+			OptionsState.goToPlayState = goToPlayState;
 	}
 
 	var selectorLeft:Alphabet;
@@ -87,6 +95,12 @@ class OptionsState extends MusicBeatState
 		
 		if(ClientPrefs.menuTheme == 'Dark') {
 			bg.loadGraphic(Paths.image('menuBGDarkO'));
+			checker.visible = false;
+			gradientBar.visible = false;
+		}
+		
+		if(ClientPrefs.menuTheme == 'Vanilla') {
+			bg.loadGraphic(Paths.image('menuDesat'));
 			checker.visible = false;
 			gradientBar.visible = false;
 		}
@@ -142,14 +156,19 @@ class OptionsState extends MusicBeatState
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
+			if (goToPlayState) {
+				StageData.loadDirectory(PlayState.SONG);
+				goToPlayState = false;
+				LoadingState.loadAndSwitchState(new PlayState(), true);
+			} else {
+				MusicBeatState.switchState(new MainMenuState());
+			}
 		}
 
 		if (controls.ACCEPT) {
 			openSelectedSubstate(options[curSelected]);
 		}
 	}
-	
 	function changeSelection(change:Int = 0) {
 		curSelected += change;
 		if (curSelected < 0)

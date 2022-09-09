@@ -80,7 +80,7 @@ class CreditsState extends MusicBeatState
 		}
 		#end
 
-		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+		var creditsShit:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['Unknown Engine'],
 			['LeonGamer',		'leongamer',		'Main Programmer of Unknown Engine',							'https://twitter.com/LeonGamerPS4',	'279ADC'],
 			['aegislash81',		'aegislash',		'Main Co-Developer of Unknown Engine',							'https://www.tiktok.com/@aegislash81',	'279ADC'],
@@ -113,7 +113,7 @@ class CreditsState extends MusicBeatState
 			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",								'https://twitter.com/kawaisprite',		'378FC7']
 		];
 		
-		for(i in pisspoop){
+		for(i in creditsShit){
 			creditsStuff.push(i);
 		}
 	

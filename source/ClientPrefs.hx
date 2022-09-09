@@ -27,6 +27,8 @@ class ClientPrefs {
 	public static var ghostTapping:Bool = true;
 	public static var timeBarType:String = 'Time Left';
 	public static var scoreTxtType:String = 'Default';
+	public static var laneUnderlayOpacity:Float = 0;
+	//public static var loadScreen:String = 'Default';
 	public static var scoreZoom:Bool = true;
 	public static var noReset:Bool = false;
 	public static var healthBarAlpha:Float = 1;
@@ -54,7 +56,7 @@ class ClientPrefs {
 		'botplay' => false,
 		'opponentplay' => false
 	];
-
+	
 	public static var comboOffset:Array<Int> = [0, 0, 0, 0];
 	public static var ratingOffset:Int = 0;
 	public static var sickWindow:Int = 45;
@@ -115,6 +117,8 @@ class ClientPrefs {
 		FlxG.save.data.ghostTapping = ghostTapping;
 		FlxG.save.data.timeBarType = timeBarType;
 		FlxG.save.data.scoreTxtType = scoreTxtType;
+		FlxG.save.data.laneUnderlayOpacity = laneUnderlayOpacity;
+		//FlxG.save.data.loadScreen = loadScreen;
 		FlxG.save.data.scoreZoom = scoreZoom;
 		FlxG.save.data.noReset = noReset;
 		FlxG.save.data.healthBarAlpha = healthBarAlpha;
@@ -210,6 +214,12 @@ class ClientPrefs {
 		if(FlxG.save.data.scoreTxtType != null) {
 			scoreTxtType = FlxG.save.data.scoreTxtType;
 		}
+		if (FlxG.save.data.laneUnderlayOpacity != null) {
+			laneUnderlayOpacity = FlxG.save.data.laneUnderlayOpacity;
+		}
+		/*if(FlxG.save.data.loadScreen != null) {
+			loadScreen = FlxG.save.data.loadScreen;
+		}*/
 		if(FlxG.save.data.scoreZoom != null) {
 			scoreZoom = FlxG.save.data.scoreZoom;
 		}

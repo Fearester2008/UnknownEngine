@@ -79,6 +79,12 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			checker.visible = false;
 			gradientBar.visible = false;
 		}
+
+		if(ClientPrefs.menuTheme == 'Vanilla') {
+			bg.loadGraphic(Paths.image('menuDesat'));
+			checker.visible = false;
+			gradientBar.visible = false;
+		}
 		
 		if(ClientPrefs.menuTheme == 'Time of Day') {
             var hours:Int = Date.now().getHours();

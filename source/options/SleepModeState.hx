@@ -17,7 +17,14 @@ class SleepModeState extends MusicBeatState
 {	
 	var sleepText:FlxText;
 	public static var leftState:Bool = false;
-
+	static var wentToPlayState:Bool = false;
+	
+	public function new(?wentToPlayState:Bool)
+	{
+		super();
+		if (wentToPlayState != null)
+			SleepModeState.wentToPlayState = wentToPlayState;
+	}
 	
 	override function create()
 	{
@@ -40,10 +47,16 @@ class SleepModeState extends MusicBeatState
 	{
 		if (controls.ACCEPT) {
 			FlxG.sound.play(Paths.sound('confirmMenu'));
+			if (wentToPlayState) {
+				StageData.loadDirectory(PlayState.SONG);
+				wentToPlayState = false;
+				LoadingState.loadAndSwitchState(new PlayState(), true);
+			} else {
 				FlxTween.tween(sleepText, {x: -1500}, 3.7, {ease: FlxEase.expoInOut});
-				MusicBeatState.switchState(new MainMenuState());
+				MusicBeatState.switchState(new options.OptionsState());
 		}
 	}
 }	
 	
 
+}
