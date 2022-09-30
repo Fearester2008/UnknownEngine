@@ -48,6 +48,20 @@ class VisualsUISubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 		
+		var option:Option = new Option('Hide Watermark',
+			'If checked, hides watermark during a song.',
+			'hideWatermark',
+			'bool',
+			false);
+		addOption(option);
+		
+		var option:Option = new Option('Hide Judgement Counter',
+			'If checked, hides judgement and NPS counter during a song.',
+			'hideJudgements',
+			'bool',
+			false);
+		addOption(option);
+		
 		var option:Option = new Option('Time Bar:',
 			"What should the Time Bar display?",
 			'timeBarType',
@@ -56,28 +70,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
 		
-		//var option:Option = new Option('Loading Screen:',
-			//"What should the Loading Screens be?",
-			//'loadScreen',
-			//'string',
-			//'Default',
-			//['Default', 'Old', 'Disabled']);
-		//addOption(option);
-		
 		var option:Option = new Option('HUD Type:',
 			"What type should the HUD be?",
 			'scoreTxtType',
 			'string',
 			'Default',
-			['Default', 'Simple', 'Advanced', 'Mic\'d Up', 'Disabled']);
-		addOption(option);
-		
-		var option:Option = new Option('Menu Theme:',
-			'What theme should the menu be?',
-			'menuTheme',
-			'string',
-			'Light',
-			['Light', 'Dark', 'Vanilla', 'Time of Day']);
+			['Default', 'Simple', 'Advanced', 'Disabled']);
 		addOption(option);
 		
 		var option:Option = new Option('Lane Underlay Opacity',

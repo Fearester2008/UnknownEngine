@@ -31,6 +31,7 @@ class CreditsState extends MusicBeatState
 
 	var bg:FlxSprite;
 	var descText:FlxText;
+	var serverText:FlxText;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
 	var descBox:AttachedSprite;
@@ -80,22 +81,23 @@ class CreditsState extends MusicBeatState
 		}
 		#end
 
-		var creditsShit:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['Unknown Engine'],
 			['LeonGamer',		'leongamer',		'Main Programmer of Unknown Engine',							'https://twitter.com/LeonGamerPS4',	'279ADC'],
-			['aegislash81',		'aegislash',		'Main Co-Developer of Unknown Engine',							'https://www.tiktok.com/@aegislash81',	'279ADC'],
-			['nglmadison',		'maddy',		'Beta Tester for prototype \nbuilds',							'https://twitter.com/nglmadison', '279ADC'],
+			['nglmadison',		'maddy',		'Main Co-Developer of Unknown Engine',							'https://twitter.com/nglmadison',	'279ADC'],
+			['Felix75',		'leongamer',		'Assistant Programmer',		 						'https://twitter.com/_felixwastaken_', '279ADC'],
+			['aegislash81',		'aegislash',		'Additional Programmer',							'https://www.tiktok.com/@aegislash81',	'279ADC'],
 			[''],
 			['Unknown Contributors'],
-			['ItJforJadeppn',	'jadeppn',		'Dark Mode and Rest Mode',							'https://www.tiktok.com/@plasmapea1002',	'279ADC'],
+			['ItJforJadeppn',	'jadeppn',		'Dark Mode and Rest Mode',							'https://www.twitter.com/Plasmapea6',	'279ADC'],
 			[''],
 			['Psych Engine Team'],
-			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',							'https://twitter.com/Shadow_Mario_',	'444444'],
-			['RiverOaken',			'river',		'Main Artist/Animator of Psych Engine',						'https://twitter.com/RiverOaken',		'C30085'],
-			['shubs',				'shubs',			'Additional Programmer of Psych Engine',					'https://twitter.com/yoshubs',			'279ADC'],
+			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
+			['RiverOaken',			'river',			'Main Artist/Animator of Psych Engine',							'https://twitter.com/RiverOaken',		'B42F71'],
+			['shubs',				'shubs',			'Additional Programmer of Psych Engine',						'https://twitter.com/yoshubs',			'5E99DF'],
 			[''],
 			['Former Engine Members'],
-			['bb-panzu',			'bb',			'Ex-Programmer of Psych Engine',							'https://twitter.com/bbsub3',			'389A58'],
+			['bb-panzu',			'bb',				'Ex-Programmer of Psych Engine',								'https://twitter.com/bbsub3',			'3E813A'],
 			[''],
 			['Engine Contributors'],
 			['iFlicky',				'flicky',			'Composer of Psync and Tea Time\nMade the Dialogue Sounds',		'https://twitter.com/flicky_i',			'9E29CF'],
@@ -113,7 +115,7 @@ class CreditsState extends MusicBeatState
 			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",								'https://twitter.com/kawaisprite',		'378FC7']
 		];
 		
-		for(i in creditsShit){
+		for(i in pisspoop){
 			creditsStuff.push(i);
 		}
 	
@@ -170,12 +172,18 @@ class CreditsState extends MusicBeatState
 		intendedColor = bg.color;
 		changeSelection();
 		super.create();
+		
+		serverText = new FlxText(0, FlxG.height - 18, 0, "Press [CTRL] to access the Discord Server!", 16);
+		serverText.setFormat(Paths.font("vcr.ttf"), 15, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		serverText.scrollFactor.set();
+		add(serverText);
 	}
 
 	var quitting:Bool = false;
 	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
+		
 		if (FlxG.sound.music.volume < 0.7)
 		{
 			FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
@@ -190,7 +198,8 @@ class CreditsState extends MusicBeatState
 
 				var upP = controls.UI_UP_P;
 				var downP = controls.UI_DOWN_P;
-
+				var ctrl = FlxG.keys.justPressed.CONTROL;
+				
 				if (upP)
 				{
 					changeSelection(-1 * shiftMult);
@@ -201,7 +210,11 @@ class CreditsState extends MusicBeatState
 					changeSelection(1 * shiftMult);
 					holdTime = 0;
 				}
-
+				if (ctrl)
+				{
+				CoolUtil.browserLoad('https://discord.gg/zWNH9QJSJU');
+				}
+				
 				if(controls.UI_DOWN || controls.UI_UP)
 				{
 					var checkLastHold:Int = Math.floor((holdTime - 0.5) * 10);

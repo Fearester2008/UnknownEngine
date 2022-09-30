@@ -42,26 +42,20 @@ class Cache extends FlxState
 	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 1, 0xFFAA00AA);
 	var splash:FlxSprite;
 	var text:FlxText;
+	var randomTxt:FlxText;
+	
+	var isTweening:Bool = false;
+	var lastString:String = '';
 
 	var images = [];
 	var music = [];
 	
-	/**var factsShit = [
-		[Tip Don't\n spam like\n a fuckin noob.], 
-		[Tip If you make\n a Psych Port,\n don't expect free\n clout.], 
-		[Fact This "ENGINE"\n is just a\n Psych Engine fork.], 
-		[Fact This engine is truly unknown.], 
-		[Tip Don't be fucking\n idiotic and\n press any hurt\n notes.], 
-		[Fact This isn't a\n kids game.], 
-		[Tip Don't play mods\n online, it's \n basically piracy.], 
-		[Tip No tip here.],
-		[Tip Spammy songs\n require ghost \ntapping. If \nyou don't use\n it, you're\n fucked.], 
-		[Fact Input in the vanilla engine sucked ass.], 
-		[];
-	]**/
+	
 
 	override function create()
 	{
+	
+	
 		FlxG.mouse.visible = true;
 
 		FlxG.worldBounds.set(0,0);
@@ -70,6 +64,7 @@ class Cache extends FlxState
 		bitmapData2 = new Map<String,FlxGraphic>();
 		
 		super.create();
+		
 
 		splash = new FlxSprite().loadGraphic(Paths.image("titlelogo"));
 		splash.screenCenter();
@@ -82,8 +77,17 @@ class Cache extends FlxState
 		add(gradientBar);
 		gradientBar.scrollFactor.set(0, 0);
 		
+		var bottomPanel:FlxSprite = new FlxSprite(0, FlxG.height - 100).makeGraphic(FlxG.width, 100, 0xFF000000);
+		bottomPanel.alpha = 0.5;
+		add(bottomPanel);		
+		
+		randomTxt = new FlxText(20, FlxG.height - 80, 1000, "", 26);
+		randomTxt.scrollFactor.set();
+		randomTxt.setFormat("VCR OSD Mono", 26, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(randomTxt);
+		
 		text = new FlxText(200, 630, 0, "Loading...");
-		text.setFormat("VCR OSD Mono", 50, FlxColor.WHITE, CENTER);
+		text.setFormat("VCR OSD Mono", 20, FlxColor.WHITE, RIGHT);
 		text.updateHitbox();
 		text.screenCenter(X);
 		text.x = Math.ffloor(text.x);
@@ -91,7 +95,7 @@ class Cache extends FlxState
 		text.antialiasing = true;
 		add(text);
 		
-		//tipText = new FlxText(-270, 630, 0, 
+
 
 		#if cpp
 		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/characters")))
@@ -113,11 +117,29 @@ class Cache extends FlxState
 
 		super.create();
 	}
-
-	override function update(elapsed) 
+	
+	var selectedSomethin:Bool = false;
+	var timer:Float = 0;
+	
+	override function update(elapsed:Float) 
 	{
+		if (!selectedSomethin){
+			if (isTweening){
+				randomTxt.screenCenter(X);
+				timer = 0;
+			}else{
+				randomTxt.screenCenter(X);
+				timer += elapsed;
+				if (timer >= 3)
+				{
+					changeText();
+				}
+			}
+		}
 		super.update(elapsed);
 	}
+	
+
 
 	function cache()
 	{
@@ -145,6 +167,41 @@ class Cache extends FlxState
 		#end
 		FlxG.switchState(new TitleState());
 	}
+	
+	function changeText()
+	{
+		var selectedText:String = '';
+		var textArray:Array<String> = CoolUtil.coolTextFile(Paths.txt('tipText'));
 
+		randomTxt.alpha = 1;
+		isTweening = true;
+		selectedText = textArray[FlxG.random.int(0, (textArray.length - 1))].replace('--', '\n');
+		FlxTween.tween(randomTxt, {alpha: 0}, 1, {
+			ease: FlxEase.linear,
+			onComplete: function(shit:FlxTween)
+			{
+				if (selectedText != lastString)
+				{
+					randomTxt.text = selectedText;
+					lastString = selectedText;
+				}
+				else
+				{
+					selectedText = textArray[FlxG.random.int(0, (textArray.length - 1))].replace('--', '\n');
+					randomTxt.text = selectedText;
+				}
+
+				randomTxt.alpha = 0;
+
+				FlxTween.tween(randomTxt, {alpha: 1}, 1, {
+					ease: FlxEase.linear,
+					onComplete: function(shit:FlxTween)
+					{
+						isTweening = false;
+					}
+				});
+			}
+		});
+	}
 }
 #end

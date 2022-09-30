@@ -9,9 +9,13 @@ import Controls;
 class ClientPrefs {
 	public static var downScroll:Bool = false;
 	public static var middleScroll:Bool = false;
+	public static var bfAltVersion:String = 'Normal';
 	public static var opponentStrums:Bool = true;
 	public static var showFPS:Bool = true;
-	public static var menuTheme:String = 'Light';
+ 	public static var menuTheme:String = 'Light';
+	public static var iconBop:String = 'Unknown';
+	public static var removePerfs:Bool = false;
+	public static var randomText:Bool = true;
 	public static var flashing:Bool = true;
 	public static var globalAntialiasing:Bool = true;
 	public static var noteSplashes:Bool = true;
@@ -21,6 +25,8 @@ class ClientPrefs {
 	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;
 	public static var hideHud:Bool = false;
+	public static var hideWatermark:Bool = false;
+	public static var hideJudgements:Bool = false;
 	public static var noteOffset:Int = 0;
 	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
 	public static var imagesPersist:Bool = false;
@@ -59,6 +65,7 @@ class ClientPrefs {
 	
 	public static var comboOffset:Array<Int> = [0, 0, 0, 0];
 	public static var ratingOffset:Int = 0;
+	public static var perfectWindow:Int = 10;
 	public static var sickWindow:Int = 45;
 	public static var goodWindow:Int = 90;
 	public static var badWindow:Int = 135;
@@ -99,9 +106,13 @@ class ClientPrefs {
 	public static function saveSettings() {
 		FlxG.save.data.downScroll = downScroll;
 		FlxG.save.data.middleScroll = middleScroll;
+		FlxG.save.data.bfAltVersion = bfAltVersion;
 		FlxG.save.data.opponentStrums = opponentStrums;	
 		FlxG.save.data.showFPS = showFPS;
 		FlxG.save.data.menuTheme = menuTheme;
+		FlxG.save.data.iconBop = iconBop;
+		FlxG.save.data.removePerfs = removePerfs;
+		FlxG.save.data.randomText = randomText;
 		FlxG.save.data.flashing = flashing;
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
@@ -112,6 +123,8 @@ class ClientPrefs {
 		FlxG.save.data.camZooms = camZooms;
 		FlxG.save.data.noteOffset = noteOffset;
 		FlxG.save.data.hideHud = hideHud;
+		FlxG.save.data.hideWatermark = hideWatermark;
+		FlxG.save.data.hideJudgements = hideJudgements;
 		FlxG.save.data.arrowHSV = arrowHSV;
 		FlxG.save.data.imagesPersist = imagesPersist;
 		FlxG.save.data.ghostTapping = ghostTapping;
@@ -127,6 +140,7 @@ class ClientPrefs {
 		FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
 
 		FlxG.save.data.ratingOffset = ratingOffset;
+		FlxG.save.data.perfectWindow = perfectWindow;
 		FlxG.save.data.sickWindow = sickWindow;
 		FlxG.save.data.goodWindow = goodWindow;
 		FlxG.save.data.badWindow = badWindow;
@@ -153,6 +167,9 @@ class ClientPrefs {
 		if(FlxG.save.data.middleScroll != null) {
 			middleScroll = FlxG.save.data.middleScroll;
 		}
+		if(FlxG.save.data.bfAltVersion!= null) {
+			bfAltVersion = FlxG.save.data.bfAltVersion;
+		}
 		if(FlxG.save.data.opponentStrums != null) {
 			opponentStrums = FlxG.save.data.opponentStrums;
 		}
@@ -164,6 +181,15 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.menuTheme != null) {
 			menuTheme = FlxG.save.data.menuTheme;
+		}
+		if(FlxG.save.data.iconBop != null) {
+			iconBop = FlxG.save.data.iconBop;
+		}
+		if(FlxG.save.data.removePerfs != null) {
+			removePerfs = FlxG.save.data.removePerfs;
+		}
+		if(FlxG.save.data.randomText != null) {
+			randomText = FlxG.save.data.randomText;
 		}
 		if(FlxG.save.data.flashing != null) {
 			flashing = FlxG.save.data.flashing;
@@ -198,6 +224,12 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.hideHud != null) {
 			hideHud = FlxG.save.data.hideHud;
+		}
+		if(FlxG.save.data.hideWatermark != null) {
+			hideWatermark = FlxG.save.data.hideWatermark;
+		}
+		if(FlxG.save.data.hideJudgements != null) {
+			hideJudgements = FlxG.save.data.hideJudgements;
 		}
 		if(FlxG.save.data.noteOffset != null) {
 			noteOffset = FlxG.save.data.noteOffset;
@@ -235,6 +267,9 @@ class ClientPrefs {
 		
 		if(FlxG.save.data.ratingOffset != null) {
 			ratingOffset = FlxG.save.data.ratingOffset;
+		}
+		if(FlxG.save.data.perfectWindow != null) {
+			perfectWindow = FlxG.save.data.perfectWindow;
 		}
 		if(FlxG.save.data.sickWindow != null) {
 			sickWindow = FlxG.save.data.sickWindow;

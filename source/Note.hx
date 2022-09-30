@@ -161,6 +161,29 @@ class Note extends FlxSprite
 	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false)
 	{
 		super();
+		
+		if (!inEditor && ClientPrefs.getGameplaySetting('randomcharts', false)) {
+			noteData = FlxG.random.int(0,3);				
+			if (sustainNote) {				
+				noteData = prevNote.noteData;					
+			}				
+		}			
+
+
+		if (!inEditor && ClientPrefs.getGameplaySetting('mirrorcharts', false)) {
+			noteData = Std.parseInt(Std.string(Math.abs(Std.parseFloat(Std.string(noteData-3)))));
+			/*
+			if (noteData == 0) {
+				noteData = 3;
+			} else if (noteData == 1) {
+				noteData = 2;
+			} else if (noteData == 2) {
+				noteData = 1;
+			} else if (noteData == 3) {
+				noteData = 0;
+			}
+			*/
+		}
 
 		if (prevNote == null)
 			prevNote = this;

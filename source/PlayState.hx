@@ -186,7 +186,7 @@ class PlayState extends MusicBeatState
 	public var timeBar:FlxBar;
 
 	public var ratingsData:Array<Rating> = [];
-	//public var perfects:Int = 0;
+	public var perfects:Int = 0;
 	public var sicks:Int = 0;
 	public var goods:Int = 0;
 	public var bads:Int = 0;
@@ -255,6 +255,8 @@ class PlayState extends MusicBeatState
 	var bottomBoppers:BGSprite;
 	var santa:BGSprite;
 	var heyTimer:Float;
+	
+	var dancingLeft:Bool = false;
 
 	var bgGirls:BackgroundGirls;
 	var wiggleShit:WiggleEffect = new WiggleEffect();
@@ -273,10 +275,11 @@ class PlayState extends MusicBeatState
 	var timeTxt:FlxText;
 	var npsCounter:FlxText;
 	var judgementCounter:FlxText;
+
 	var scoreTxtTween:FlxTween;
 	
 	var versionTxt:FlxText;
-
+	
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
 	public static var seenCutscene:Bool = false;
@@ -342,15 +345,13 @@ class PlayState extends MusicBeatState
 		];
 
 		//Ratings
-		ratingsData.push(new Rating('sick')); //default rating
+		if (!ClientPrefs.removePerfs) ratingsData.push(new Rating('perfect')); //default rating
 
-		/**
 		var rating:Rating = new Rating('sick');
 		rating.ratingMod = 1;
 		rating.score = 350;
 		rating.noteSplash = true;
 		ratingsData.push(rating);
-		**/
 
 		var rating:Rating = new Rating('good');
 		rating.ratingMod = 0.7;
@@ -1217,15 +1218,13 @@ class PlayState extends MusicBeatState
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 		
-		
-		
 		npsCounter = new FlxText(20, FlxG.height - 390, 0);
 		npsCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		npsCounter.borderSize = 2;
 		npsCounter.borderQuality = 2;
 		npsCounter.scrollFactor.set();
 		npsCounter.cameras = [camHUD];
-		
+		npsCounter.visible = !ClientPrefs.hideJudgements;
 		add(npsCounter);
 		
  		judgementCounter = new FlxText(20, 0, 0, "", 20);
@@ -1235,15 +1234,20 @@ class PlayState extends MusicBeatState
 		judgementCounter.scrollFactor.set();
 		judgementCounter.cameras = [camHUD];
 		judgementCounter.screenCenter(Y);
-		judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
-		
+		judgementCounter.text = 'Perfects: ${perfects}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
+		judgementCounter.visible = !ClientPrefs.hideJudgements;
 		add(judgementCounter);
+		
+		if(ClientPrefs.removePerfs) {
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
+		}
 		
 		versionTxt = new FlxText(0, FlxG.height - 18, 0, SONG.song + " - " +
 			CoolUtil.difficultyString() + " | UE " +
 			MainMenuState.unknownEngineVersion, 16);
 		versionTxt.setFormat(Paths.font("vcr.ttf"), 15, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		versionTxt.scrollFactor.set();
+		versionTxt.visible = !ClientPrefs.hideWatermark;
 		add(versionTxt);
 
 		botplayTxt = new FlxText(850, timeBarBG.y + 670, FlxG.width - 800, "Botplay is enabled, Score won't be saved.", 32);
@@ -2966,55 +2970,42 @@ class PlayState extends MusicBeatState
 		setOnLuas('curDecBeat', curDecBeat);
 		
 		if (cpuControlled) {
-			npsCounter.text = 'NPS: ' + nps + '';
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = 'Score: 0 (' + thScore + ') | Misses: ' + songMisses + ' | Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% | Rating: ' + ratingName;
 		} else if(ratingName == '?') {
-			npsCounter.text = 'NPS: ' + nps + '';
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% | Rating: ' + ratingName;
 		} else {
-			npsCounter.text = 'NPS: ' + nps + '';
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% | Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
 		}
 		
 		if (cpuControlled && ClientPrefs.scoreTxtType == 'Simple') {
-			npsCounter.text = 'NPS: ' + nps + '';
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = '([0] ' + thScore + ' PTS) (' + songMisses + ' Misses) (' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + ' HP) ' + ratingName;
 		} else if(ratingName == '?' && ClientPrefs.scoreTxtType == 'Simple') {
-			npsCounter.text = 'NPS: ' + nps + '';
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = '(' + songScore + ' PTS) (' + songMisses + ' Misses) (' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + ' HP) ' + ratingName;
 		} else if (ClientPrefs.scoreTxtType == 'Simple') {
-			npsCounter.text = 'NPS: ' + nps + '';
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = '(' + songScore + ' PTS) (' + songMisses + ' Misses) (' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + ' HP) ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;
 		}
 		
 		if (cpuControlled && ClientPrefs.scoreTxtType == 'Advanced') {
-			npsCounter.text = 'NPS: ' + nps + '';
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
-			scoreTxt.text = 'Rating: ' + ratingName + ' // Combo Breaks: ' + songMisses + ' // Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% // Score: 0 (' + thScore + ') // Accuracy: ' + ratingName + ' // Overall Rating: ' + ratingName;
+			scoreTxt.text = 'Score: ' + songScore + ' (' + thScore + ') // Health: ' + Highscore.floorDecimal(healthPercentageDisplay, 0) + '% // Misses: ' + songMisses + ' // Rating: ' + ratingName + ' // Accuracy: ' + ratingName + ' // Rating FC: ' + ratingName;
 		} else if(ratingName == '?' && ClientPrefs.scoreTxtType == 'Advanced') {
-			npsCounter.text = 'NPS: ' + nps + '';
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
-			scoreTxt.text = 'Rating: ' + ratingName + ' // Combo Breaks: ' + songMisses + ' // Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% // Score: ' + songScore + ' // Accuracy: ' + ratingName + ' // Overall Rating: ' + ratingName;
+			scoreTxt.text = 'Score: ' + songScore + ' (' + thScore + ') // Health: ' + Highscore.floorDecimal(healthPercentageDisplay, 0) + '% // Misses: ' + songMisses + ' // Rating: ' + ratingName + ' // Accuracy: ' + ratingName + ' // Rating FC: ' + ratingName;
 		} else if (ClientPrefs.scoreTxtType == 'Advanced') {
-			npsCounter.text = 'NPS: ' + nps + '';
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
-			scoreTxt.text = 'Rating: ' + ratingName + ' // Combo Breaks: ' + songMisses + ' // Health: ' + FlxMath.roundDecimal(healthPercentageDisplay, 0) + '% // Score: ' + songScore + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% // Overall Rating: ' + ratingFC;
+			scoreTxt.text = 'Score: ' + songScore + ' (' + thScore + ') // Health: ' + Highscore.floorDecimal(healthPercentageDisplay, 0) + '% // Misses: ' + songMisses + ' // Rating: ' + ratingName + ' // Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% // Rating FC: ' + ratingFC;
 		}
 		
 		if(ratingName == '?' && ClientPrefs.scoreTxtType == 'Disabled') {
-			npsCounter.text = 'NPS: ' + nps + '';
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = '';
 		} else if (ClientPrefs.scoreTxtType == 'Disabled') {
-			npsCounter.text = 'NPS: ' + nps + '';
-			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 			scoreTxt.text = '';
+		}
+		
+		
+		
+		npsCounter.text = 'NPS: ' + nps + '';
+		judgementCounter.text = 'Perfects: ${perfects}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
+		
+		if(ClientPrefs.removePerfs) {
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
 		}
 
 
@@ -3050,10 +3041,28 @@ class PlayState extends MusicBeatState
 		var iconOffset:Int = 26;
 
 		iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
-		iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
-
+        iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - 150 + iconOffset;
+		
+		if (ClientPrefs.iconBop == 'Psych') {
+			iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+			iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+		} else if(ClientPrefs.iconBop == 'OS') {
+			iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) + (150 * iconP1.scale.x - 150) / 2 - iconOffset;
+			iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (150 * iconP2.scale.x) / 2 - iconOffset * 2;
+		} else if (ClientPrefs.iconBop == 'PFNF') {
+			iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
+			iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
+		} else if (ClientPrefs.iconBop == 'Unknown 2') {
+			iconP1.x = 1;
+			iconP2.x = 25;
+		}
 		if (health > 2)
 			health = 2;
+		
+		else if (CoolUtil.difficultyString() == 'MASTER' && health > 2)
+			health = 1;
+			
+		
 			
 		healthPercentageDisplay = health / 0.02;
 
@@ -3184,9 +3193,10 @@ class PlayState extends MusicBeatState
 					//boyfriend.animation.curAnim.finish();
 				}
 			}
-
+			
 			var fakeCrochet:Float = (60 / SONG.bpm) * 1000;
 			notes.forEachAlive(function(daNote:Note)
+		
 			{
 				var strumGroup:FlxTypedGroup<StrumNote> = playerStrums;
 				if(!daNote.mustPress) strumGroup = opponentStrums;
@@ -3349,6 +3359,19 @@ class PlayState extends MusicBeatState
 		#if desktop
 		DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
 		#end
+	}
+	
+	public function openChangersMenu()
+	{
+		persistentUpdate = false;
+		persistentDraw = true;
+		paused = true;
+
+		if(FlxG.sound.music != null) {
+			FlxG.sound.music.pause();
+			vocals.pause();
+		}
+		openSubState(new GameplayChangersSubstate());
 	}
 
 	function openChartEditor()
@@ -4120,7 +4143,12 @@ class PlayState extends MusicBeatState
 			spawnNoteSplashOnNote(note);
 		}
 		
-		thScore += 350;
+		thScore += 700;
+		
+		if(ClientPrefs.removePerfs) {
+			thScore += 350;
+		} 
+		
 		if(!practiceMode && !cpuControlled) {
 			songScore += score;
 			if(!note.ratingDisabled)
@@ -4993,7 +5021,15 @@ class PlayState extends MusicBeatState
 		iconP1.scale.set(1.2, 1.2);
 		iconP2.scale.set(1.2, 1.2);
 		
+		dancingLeft = !dancingLeft;
 		
+		if (ClientPrefs.iconBop == 'OS') {
+			if (dancingLeft){
+				iconP1.angle = 8; iconP2.angle = 8;
+			} else { 
+				iconP1.angle = -8; iconP2.angle = -8;
+			}
+		}
 
 		iconP1.updateHitbox();
 		iconP2.updateHitbox();
@@ -5190,17 +5226,22 @@ class PlayState extends MusicBeatState
 
 			// Rating FC
 			ratingFC = "";
-			//if (perfs > 0) ratingFC = "MFC";
-			if (sicks > 0) ratingFC = "SFC";
-			if (goods > 0) ratingFC = "GFC";
-			if (bads > 0 || shits > 0) ratingFC = "FC";
-			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
-			else if (songMisses >= 10) ratingFC = "Clear";
+			if (perfects > 0 && !ClientPrefs.removePerfs) ratingFC = "MFC"; // Marvelous Full Combo
+			if (sicks > 0) ratingFC = "SFC"; // Sick Full Combo
+			if (goods > 0) ratingFC = "GFC"; // Good Full Combo
+			if (bads > 0) ratingFC = "AFC"; // Alright Full Combo
+			if (shits > 0) ratingFC = "FC"; // Full Combo
+			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB"; // Single Digit Combo Breaks
+			else if (songMisses >= 10) ratingFC = "Clear"; // Double Digit and over
 		}
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
 		setOnLuas('ratingFC', ratingFC);
-					judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
+		judgementCounter.text = 'Perfects: ${perfects}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
+		
+		if(ClientPrefs.removePerfs) {
+			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\nMisses: ${songMisses}';
+		}
 	}
 
 	#if ACHIEVEMENTS_ALLOWED
