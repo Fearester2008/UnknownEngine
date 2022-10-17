@@ -65,6 +65,8 @@ class TitleState extends MusicBeatState
 	var credGroup:FlxGroup;
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
+	var FNF_Logo:FlxSprite;
+	var UE_Logo:FlxSprite;
 	var logoSpr:FlxSprite;
 	
 	var titleTextColors:Array<FlxColor> = [0xFF33FFFF, 0xFF3333CC];
@@ -405,11 +407,28 @@ class TitleState extends MusicBeatState
 		blackScreen = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		credGroup.add(blackScreen);
 		
+		FNF_Logo = new FlxSprite(0, 0).loadGraphic(Paths.image('FNF_Logo'));
+		UE_Logo = new FlxSprite(0, 0).loadGraphic(Paths.image('UE_Logo'));
+		add(FNF_Logo);
+		add(UE_Logo);
+		UE_Logo.scale.set(0.6, 0.6);
+		FNF_Logo.scale.set(0.6, 0.6);
+		UE_Logo.updateHitbox();
+		FNF_Logo.updateHitbox();
+		UE_Logo.antialiasing = true;
+		FNF_Logo.antialiasing = true;
+
+		UE_Logo.x = -1500;
+		UE_Logo.y = 300;
+		FNF_Logo.x = -1500;
+		FNF_Logo.y = 300;
+		
 		gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x00ff0000, 0x553D0468, 0xAABF1943], 1, 90, true);
 		gradientBar.y = FlxG.height - gradientBar.height;
 		gradientBar.scale.y = 0;
 		gradientBar.updateHitbox();
 		add(gradientBar);
+		gradientBar.shader = swagShader.shader;
 		FlxTween.tween(gradientBar, {'scale.y': 1.3}, 4, {ease: FlxEase.quadInOut});
 
 		credTextShit = new Alphabet(0, 0, "", true);
@@ -721,17 +740,10 @@ class TitleState extends MusicBeatState
 				// credTextShit.text += '\nlmao';
 				case 13:
 					deleteCoolText();
-				// credTextShit.visible = false;
-				// credTextShit.text = "Friday";
-				// credTextShit.screenCenter();
 				case 14:
-					addMoreText('Friday Night Funkin');
-				// credTextShit.visible = true;
+					FlxTween.tween(FNF_Logo, {y: 150, x: 300}, 0.8, {ease: FlxEase.backOut});
 				case 15:
-					addMoreText('Unknown');
-				// credTextShit.text += '\nNight';
-				case 16:
-					addMoreText('Engine'); // credTextShit.text += '\nFunkin';
+					FlxTween.tween(UE_Logo, {y: 436, x: 307}, 0.8, {ease: FlxEase.backOut});
 
 				case 17:
 					skipIntro();
@@ -745,6 +757,8 @@ class TitleState extends MusicBeatState
 	{
 		if (!skippedIntro)
 		{
+			remove(FNF_Logo);
+			remove(UE_Logo);
 			if (playJingle) //Ignore deez
 			{
 				var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
@@ -781,6 +795,8 @@ class TitleState extends MusicBeatState
 					new FlxTimer().start(3.2, function(tmr:FlxTimer)
 					{
 						remove(logoSpr);
+						remove(FNF_Logo);
+						remove(UE_Logo);
 						remove(credGroup);
 						FlxG.camera.flash(FlxColor.WHITE, 0.6);
 						transitioning = false;
@@ -789,6 +805,8 @@ class TitleState extends MusicBeatState
 				else
 				{
 					remove(logoSpr);
+					remove(FNF_Logo);
+					remove(UE_Logo);
 					remove(credGroup);
 					FlxG.camera.flash(FlxColor.WHITE, 3);
 					sound.onComplete = function() {

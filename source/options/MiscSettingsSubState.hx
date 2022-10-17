@@ -56,7 +56,7 @@ class MiscSettingsSubState extends BaseOptionsMenu
 			'iconBop',
 			'string',
 			'Unknown',
-			['Unknown', 'Unknown 2', 'Psych', 'PFNF',  'OS']);
+			['Unknown', 'Psych', 'PFNF',  'OS']);
 		addOption(option);
 		
 		var option:Option = new Option('Menu Theme:',
@@ -67,6 +67,7 @@ class MiscSettingsSubState extends BaseOptionsMenu
 			['Light', 'Dark', 'Vanilla', 'Time of Day']);
 		addOption(option);
 		
+		/*
 		var option:Option = new Option('BF Version:',
 			"What BF should be used in gameplay?",
 			'bfAltVersion',
@@ -76,14 +77,17 @@ class MiscSettingsSubState extends BaseOptionsMenu
 		addOption(option);
 		option.showBoyfriend = true;
 		option.onChange = onChangeBoyfriendOption;
+		*/
 		
+		/*
 		var option:Option = new Option('Filter:',
 			'Change how colors of the game work,\n either for fun or if you\'re colorblind.',
 			'colorFilter',
 			'string',
 			'None',
 			['None', 'Tritanopia', 'Protanopia', 'Deutranopia', 'Virtual Boy', 'Gameboy', ' Downer', 'Grayscale', 'Invert']);
-
+		addOption(option);
+		*/
 		super();
 	}
 
@@ -104,6 +108,7 @@ class MiscSettingsSubState extends BaseOptionsMenu
 		super.destroy();
 	}
 
+	/*
 	function onChangeBoyfriendOption()
 	{
 		for (sprite in members)
@@ -113,10 +118,11 @@ class MiscSettingsSubState extends BaseOptionsMenu
 			if(sprite != null && (sprite is FlxSprite) && !(sprite is FlxText)) {
 				if (ClientPrefs.bfAltVersion == 'Normal') sprite.loadGraphic('characters/BOYFRIEND', true);
 				if (ClientPrefs.bfAltVersion == 'ZERO') sprite.loadGraphic('characters/BOYFRIEND-ZERO', true);
-				if (ClientPrefs.bfAltVersion == 'TzenZoule') sprite.loadGraphic('characters/tzenbf', true);
+				if (ClientPrefs.bfAltVersion == 'Reanimated') sprite.loadGraphic('characters/BOYFRIEND', true);
 			}
 		}
 	}
+	*/
 
 	#if !mobile
 	function onChangeFPSCounter()

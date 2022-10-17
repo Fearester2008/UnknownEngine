@@ -66,7 +66,7 @@ class FPS extends TextField
         if (mem > memPeak) memPeak = mem;
         if (visible)
         {
-            text = "FPS: " + times.length + "\nMEM: " + mem + " MB\nMEM peak: " + memPeak + " MB\nUE Version " + MainMenuState.unknownEngineVersion;
+            text = "FPS: " + times.length + "\nMemory: " + mem + " MB\nMemory Peak: " + memPeak + " MB\nEngine Version " + MainMenuState.unknownEngineVersion;
         }
     }
 }

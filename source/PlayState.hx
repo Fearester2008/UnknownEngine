@@ -3052,16 +3052,22 @@ class PlayState extends MusicBeatState
 		} else if (ClientPrefs.iconBop == 'PFNF') {
 			iconP1.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01) - iconOffset);
 			iconP2.x = healthBar.x + (healthBar.width * (FlxMath.remapToRange(healthBar.percent, 0, 100, 100, 0) * 0.01)) - (iconP2.width - iconOffset);
+		}
+		/*
 		} else if (ClientPrefs.iconBop == 'Unknown 2') {
 			iconP1.x = 1;
 			iconP2.x = 25;
 		}
+		*/
+		
+		
 		if (health > 2)
 			health = 2;
 		
+		/*
 		else if (CoolUtil.difficultyString() == 'MASTER' && health > 2)
 			health = 1;
-			
+		*/
 		
 			
 		healthPercentageDisplay = health / 0.02;
@@ -3959,7 +3965,7 @@ class PlayState extends MusicBeatState
 		} else {
 			var achieve:String = checkForAchievement(['week1_nomiss', 'week2_nomiss', 'week3_nomiss', 'week4_nomiss',
 				'week5_nomiss', 'week6_nomiss', 'week7_nomiss', 'ur_bad',
-				'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
+				'funni', 'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
 
 			if(achieve != null) {
 				startAchievement(achieve);
@@ -5280,6 +5286,10 @@ class PlayState extends MusicBeatState
 						}
 					case 'ur_bad':
 						if(ratingPercent < 0.2 && !practiceMode) {
+							unlock = true;
+						}
+					case 'funni':
+						if(ratingPercent < 0.69 && !practiceMode) {
 							unlock = true;
 						}
 					case 'ur_good':

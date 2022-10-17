@@ -49,8 +49,6 @@ class Cache extends FlxState
 
 	var images = [];
 	var music = [];
-	
-	
 
 	override function create()
 	{
@@ -79,7 +77,7 @@ class Cache extends FlxState
 		
 		var bottomPanel:FlxSprite = new FlxSprite(0, FlxG.height - 100).makeGraphic(FlxG.width, 100, 0xFF000000);
 		bottomPanel.alpha = 0.5;
-		add(bottomPanel);		
+		add(bottomPanel);	
 		
 		randomTxt = new FlxText(20, FlxG.height - 80, 1000, "", 26);
 		randomTxt.scrollFactor.set();
