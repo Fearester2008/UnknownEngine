@@ -12,16 +12,16 @@
                                                        
  __                                                    
 |_   _ .  _|  _        _  .  _  |_  |_       _  _  |_  
-|   |  | (_| (_| \/   | ) | (_) | ) |_   \/ (- (_| | ) 
+|   |  | (_| (_| \/   | ) | (_) | ) |_   \/ (- (_| | ) 																																																							go mango go
                  /          _/           /             
 
 HEY
-Thanks for downloadin Friday Night FUNKIN'
-If you downloaded this from any other place than ninja-muffin24.itch.io/FUNKIN
+Thanks for downloadin Friday Night FUNKIN': UNKNOWN ENGINE
+If you downloaded this from any other place than https://github.com/LeonGamerPS4/UnknownEngine
 You might be in DANGER!!! 
 
-The Itch.io release is the only official source for the desktop (PC, Mac, Linux) versions of the game!
-As of right now, the game is FREE! If you paid for it, you got SCAMMED!
+The GitHub release is the only official sources for the desktop (PC) version of the engine!
+This engine is FREE! You can't pay for a mod lmao.
 
 Now that that's out of the way....
 THANKS FOR DOWNLOADIN. 
@@ -30,29 +30,32 @@ THANKS FOR DOWNLOADIN.
     PERMISSIONS XDDDD
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
-Little info, you have FULL PERMISSION to stream, letsplay, meme, shitpost, do WHATEVER you want with the game.
+Little info, you have FULL PERMISSION to stream, letsplay, meme, shitpost, do WHATEVER you want with the engine.
 Use the music in videos you do, use art, ANYTHING. GO CRAZY BRO.
 
-If you do make any sort of video, it would be a bro move if you linked the game and spread the word
+If you do make any sort of video, it would be a bro move if you linked the engine and spread the word
 
-Play On Newgrounds - https://www.newgrounds.com/portal/view/770371
-Support on Itch.io - https://ninja-muffin24.itch.io/funkin
+Download on GameBanana (OUTDATED) - https://gamebanana.com/mods/15309
+Download the source code/latest release on GitHub - https://github.com/LeonGamerPS4/UnknownEngine
+Play On Newgrounds (Week 7 timed exclusive!) - https://www.newgrounds.com/portal/view/770371
+Support Funkin' on Itch.io - https://ninja-muffin24.itch.io/funkin
 
-If not no biggie we don't fully hate you only kinda no biggie.
+If not no biggie I don't fully hate you only kinda no biggie.
 
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
     INFO AND LINKS
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
 
-If you wanna dig around, the game is fully open source on Github
-https://github.com/ninjamuffin99/Funkin
+If you wanna dig around, the engine is fully open source on Github
+https://github.com/LeonGamerPS4/UnknownEngine
 
-It's made in Haxe / HaxeFlixel
+It's made in Haxe / HaxeFlixel, using Psych Engine as its shell
 
-MUSIC IS ON SPOTIFY AND BANDCAMP AND EVERYWHERE ELSE PROB TOO
+MUSIC IS ON SPOTIFY AND BANDCAMP AND EVERYWHERE ELSE PROB TOO BY KAWAISPRIITE, GO SUPPORT THIS DUDE
 https://kawaisprite.bandcamp.com/album/friday-night-funkin-ost-vol-1
 
+this is a truly unknown engine.
 
 #-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-#-
     FINAL WORDS / CREDITS
@@ -65,7 +68,25 @@ https://twitter.com/phantomarcade3k
 https://twitter.com/kawaisprite
 https://twitter.com/evilsk8r
 
-Pico is created by Tom Fulp
+Unknown Engine is made by LeonGamer (programmer), nglmadison (co-owner), and _felixwastaken_ (assistant programmer)
+
+https://twitter.com/LeonGamerPS4
+https://twitter.com/nglmadison
+https://twitter.com/_felixwastaken_
+
+Psych Engine is made by Shadow Mario (programmer), RiverOaken (artist and animator), and Yoshubs (additional programmer)
+
+https://twitter.com/Shadow_Mario_
+https://twitter.com/RiverOaken
+https://twitter.com/yoshubs
+
+Mic'd Up is made by Verwex (mod creator), KadeDev and Ash237 (programmers)
+
+https://twitter.com/Vershift
+https://twitter.com/kadedeveloper
+https://steamcommunity.com/profiles/76561198353865795
+
+Pico was created by Tom Fulp
 Skid and Pump are created by SrPelo
 BassetFilms did music for lemon monster songs
 
