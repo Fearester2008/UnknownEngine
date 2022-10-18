@@ -58,7 +58,7 @@ class OptionsState extends MusicBeatState
 				openSubState(new options.MiscSettingsSubState());
 		}
 	}
-
+	
 	public function new(?goToPlayState:Bool)
 	{
 		super();
@@ -118,17 +118,20 @@ class OptionsState extends MusicBeatState
             }
         }
 
+		grpOptions = new FlxTypedGroup<Alphabet>();
+		add(grpOptions);
+
 		for (i in 0...options.length)
 		{
-			var optionText:Alphabet = new Alphabet(0, 0, options[i], true, false);
+			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
 			optionText.screenCenter();
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
 			grpOptions.add(optionText);
 		}
 
-		selectorLeft = new Alphabet(0, 0, '>', true, false);
+		selectorLeft = new Alphabet(0, 0, '>', true);
 		add(selectorLeft);
-		selectorRight = new Alphabet(0, 0, '<', true, false);
+		selectorRight = new Alphabet(0, 0, '<', true);
 		add(selectorRight);
 
 		changeSelection();
@@ -169,6 +172,7 @@ class OptionsState extends MusicBeatState
 			openSelectedSubstate(options[curSelected]);
 		}
 	}
+	
 	function changeSelection(change:Int = 0) {
 		curSelected += change;
 		if (curSelected < 0)

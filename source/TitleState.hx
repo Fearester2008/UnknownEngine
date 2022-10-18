@@ -36,8 +36,8 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
-import openfl.Assets;
 import flixel.util.FlxGradient;
+import openfl.Assets;
 
 using StringTools;
 typedef TitleData =
@@ -633,7 +633,7 @@ class TitleState extends MusicBeatState
 	{
 		for (i in 0...textArray.length)
 		{
-			var money:Alphabet = new Alphabet(0, 0, textArray[i], true, false);
+			var money:Alphabet = new Alphabet(0, 0, textArray[i], true);
 			money.screenCenter(X);
 			money.y += (i * 60) + 200 + offset;
 			if(credGroup != null && textGroup != null) {
@@ -646,7 +646,7 @@ class TitleState extends MusicBeatState
 	function addMoreText(text:String, ?offset:Float = 0)
 	{
 		if(textGroup != null && credGroup != null) {
-			var coolText:Alphabet = new Alphabet(0, 0, text, true, false);
+			var coolText:Alphabet = new Alphabet(0, 0, text, true);
 			coolText.screenCenter(X);
 			coolText.y += (textGroup.length * 60) + 200 + offset;
 			credGroup.add(coolText);
@@ -779,6 +779,8 @@ class TitleState extends MusicBeatState
 
 					default: //Go back to normal ugly ass boring GF
 						remove(logoSpr);
+						remove(FNF_Logo);
+						remove(UE_Logo);
 						remove(credGroup);
 						FlxG.camera.flash(FlxColor.WHITE, 2);
 						skippedIntro = true;
@@ -820,6 +822,8 @@ class TitleState extends MusicBeatState
 			else //Default! Edit this one!!
 			{
 				remove(logoSpr);
+				remove(FNF_Logo);
+				remove(UE_Logo);
 				remove(credGroup);
 				FlxG.camera.flash(FlxColor.WHITE, 4);
 
