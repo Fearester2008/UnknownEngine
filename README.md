@@ -7,9 +7,9 @@
 Support Funkin' on [Newgrounds](https://www.newgrounds.com/portal/view/770371), [GitHub](https://github.com/ninjamuffin99/Funkin), and [Itch.io](https://ninja-muffin24.itch.io/funkin)!
  
 ## Credits
-* LeonGamer - Coding
-* aegislash81 - Assistant Coding 
-* nglmadison - Beta Testing
+* LeonGamer - Developer
+* nglmadison - Co-Developer
+* \_felixwastaken_ - Assistant Programmer
 
 ## Psych Engine
 * Shadow Mario - Coding for Psych Engine
