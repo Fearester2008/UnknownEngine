@@ -10,6 +10,7 @@ Support Funkin' on [Newgrounds](https://www.newgrounds.com/portal/view/770371), 
 * LeonGamer - Developer
 * nglmadison - Co-Developer
 * \_felixwastaken_ - Assistant Programmer
+* QoTz - Feedback Assistant
 
 ## Psych Engine
 * Shadow Mario - Coding for Psych Engine
