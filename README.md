@@ -23,7 +23,7 @@ Support Funkin' on [Newgrounds](https://www.newgrounds.com/portal/view/770371), 
 * Ash237 - Additional Programmer
 
 ### Special Thanks
-* xenkap - Cool Mic'd Up style menu from Ice Engine
+* xenkap - Cool Mic'd Up style menu from Ice Engine + Funny Pause Menu texts
 * shubs - New Input System
 * SqirraRNG - Chart Editor's Sound Waveform base code
 * iFlicky - Delay/Combo Menu Song Composer + Dialogue Sounds
