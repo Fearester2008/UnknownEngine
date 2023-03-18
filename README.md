@@ -1,15 +1,26 @@
 <p align="center">
-	<a href="https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/titlelogo.png" target="_blank"><img src="/assets/preload/images/titlelogo.png"></a>
+	<a href="https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/UELogo_LS.png" target="_blank"><img src="/assets/preload/images/UELogo_LS.png"></a>
 </p>
 
 # This is the repository for Friday Night Funkin': Unknown Engine, an engine built off of [Psych Engine.](https://github.com/ShadowMario/FNF-PsychEngine)
 
 Support Funkin' on [Newgrounds](https://www.newgrounds.com/portal/view/770371), [GitHub](https://github.com/ninjamuffin99/Funkin), and [Itch.io](https://ninja-muffin24.itch.io/funkin)!
  
+## Customization:
+
+If you wish to disable things like *Lua Scripts* or *Video Cutscenes*, you can read over to `Project.xml`
+
+inside `Project.xml`, you will find several variables to customize Unknown Engine to your liking
+
+to start you off, disabling Videos should be simple, simply Delete the line `"VIDEOS_ALLOWED"` or comment it out by wrapping the line in XML-like comments, like this `<!-- YOUR_LINE_HERE -->`
+
+same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, this and other customization options are all available within the `Project.xml` file
+
 ## Credits
-* LeonGamer - Coding
-* aegislash81 - Assistant Coding 
-* nglmadison - Beta Testing
+* LeonGamer - Coding for Unknown Engine
+* UmbraFromTDS - Co-Developer of Unknown Engine
+* C97Mystical - Assistant Coding
+* AshishXMC - Arts for Unknown Engine
 
 ## Psych Engine
 * Shadow Mario - Coding for Psych Engine
@@ -22,7 +33,7 @@ Support Funkin' on [Newgrounds](https://www.newgrounds.com/portal/view/770371), 
 * Ash237 - Additional Programmer
 
 ### Special Thanks
-* ItJforJadeppn - Dark Mode option and Rest Mode
+* xenkap - Flare Engine Menu + Funny Pause Menu texts
 * shubs - New Input System
 * SqirraRNG - Chart Editor's Sound Waveform base code
 * iFlicky - Delay/Combo Menu Song Composer + Dialogue Sounds
@@ -38,7 +49,7 @@ Support Funkin' on [Newgrounds](https://www.newgrounds.com/portal/view/770371), 
  
 # Compiling
 
-## What can I do with compiling the mod? Why should I compile the mod instead of downloading it from [the GameBanana page of the mod](https://gamebanana.com/mods/383504)?
+## What can I do with compiling the mod? Why should I compile the mod instead of downloading it from the newest releases?
 
 Compiling the mod gives access to the `/source` folder, allowing you to change the code of the mod. You can add a lot of cool things with the open-source code!
 
