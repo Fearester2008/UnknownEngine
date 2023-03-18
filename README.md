@@ -1,5 +1,5 @@
 <p align="center">
-	<a href="https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/UELogo_LS.png" target="_blank"><img src="/assets/preload/images/UELogo_LS.png"></a>
+	<a href="https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/UELogo-LS.png" target="_blank"><img src="/assets/preload/images/UELogo-LS.png"></a>
 </p>
 
 # This is the repository for Friday Night Funkin': Unknown Engine, an engine built off of [Psych Engine.](https://github.com/ShadowMario/FNF-PsychEngine)
