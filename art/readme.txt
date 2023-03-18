@@ -20,7 +20,7 @@ Thanks for downloadin Friday Night FUNKIN': UNKNOWN ENGINE
 If you downloaded this from any other place than https://github.com/LeonGamerPS4/UnknownEngine
 You might be in DANGER!!! 
 
-The GitHub release is the only official sources for the desktop (PC) version of the engine!
+The GitHub release is the only official source for the desktop (PC) version of the engine!
 This engine is FREE! You can't pay for a mod lmao.
 
 Now that that's out of the way....

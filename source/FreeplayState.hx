@@ -2,6 +2,7 @@ package;
 
 #if desktop
 import Discord.DiscordClient;
+import lime.app.Application;
 #end
 import editors.ChartingState;
 import flash.text.TextField;
@@ -205,14 +206,19 @@ class FreeplayState extends MusicBeatState
 		text.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, RIGHT);
 		text.scrollFactor.set();
 		add(text);
+		
+		Application.current.window.title = "Friday Night Funkin': Unknown Engine 2.0";
+		
 		super.create();
 	}
 
+	/*
 	override function closeSubState() {
 		changeSelection(0, false);
 		persistentUpdate = true;
 		super.closeSubState();
 	}
+	*/
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
 	{
@@ -326,13 +332,13 @@ class FreeplayState extends MusicBeatState
 				colorTween.cancel();
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
+			MusicBeatState.switchState(new PlaySelectionState());
 		}
 
-		if(ctrl)
+		if (ctrl)
 		{
 			persistentUpdate = false;
-			openSubState(new GameplayChangersSubstate());
+			MusicBeatState.switchState(new ModifiersState());
 		}
 		else if(space)
 		{

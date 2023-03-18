@@ -38,6 +38,8 @@ class Note extends FlxSprite
 	public var tail:Array<Note> = []; // for sustains
 	public var parent:Note;
 	public var blockHit:Bool = false; // only works for player
+		
+	public var charSkin:String = null;
 
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
@@ -161,7 +163,7 @@ class Note extends FlxSprite
 		return value;
 	}
 
-	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false)
+	public function new(strumTime:Float, noteData:Int, ?prevNote:Note, ?sustainNote:Bool = false, ?inEditor:Bool = false, ?charSkin:String = null)
 	{
 		super();
 		
@@ -183,6 +185,7 @@ class Note extends FlxSprite
 		this.prevNote = prevNote;
 		isSustainNote = sustainNote;
 		this.inEditor = inEditor;
+		this.charSkin = charSkin;
 
 		x += (ClientPrefs.middleScroll ? PlayState.STRUM_X_MIDDLESCROLL : PlayState.STRUM_X) + 50;
 		// MAKE SURE ITS DEFINITELY OFF SCREEN?
@@ -270,7 +273,24 @@ class Note extends FlxSprite
 			skin = PlayState.SONG.arrowSkin;
 			if(skin == null || skin.length < 1) {
 				skin = 'NOTE_assets';
+				if (prefix == '') {
+					if(ClientPrefs.noteSkin == 'Default') {
+						skin = 'NOTE_assets';						
+					} else if (ClientPrefs.noteSkin == 'Circle') {
+						skin = 'NOTE_assets_circle';
+					} else if (ClientPrefs.noteSkin == 'Future') {
+						skin = 'NOTE_assets-future';
+					} else if (ClientPrefs.noteSkin == 'Chip') {
+						skin = 'NOTE_assets-chip';
+					} else {
+						skin = 'NOTE_assets';// for preventing crashes
+					}
+				}
 			}
+		}
+
+		if (charSkin != null && (prefix == '')) {
+			skin = charSkin;
 		}
 
 		var animName:String = null;

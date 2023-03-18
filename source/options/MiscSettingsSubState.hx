@@ -33,22 +33,27 @@ class MiscSettingsSubState extends BaseOptionsMenu
 	{
 		title = 'Miscellaneous';
 		rpcTitle = 'Miscellaneous Settings Menu'; //for Discord Rich Presence
-				
-		/*
+		
 		var option:Option = new Option('Note Skin:',
 			"Based on Mind Games, how should they look like?",
 			'noteSkin',
 			'string',
 			'Default',
-			['Default', 'Future', 'Chip']);
+			['Default', 'Circle', 'Future', 'Chip']);
 		addOption(option);
-		*/
 		
-		var option:Option = new Option('Menu Bottom Text',
-			"If unchecked, funny text appears on the bottom\n of the menu, like CDEV.",
+		var option:Option = new Option('Disable Menu Text',
+			"If checked, text at the bottom of menu will be disabled.",
 			'randomText',
 			'bool',
 			true);
+		addOption(option);
+		
+		var option:Option = new Option('Rainbow FPS Counter',
+			"Rainbow FPS Counter. Why not?",
+			'fpsRain',
+			'bool',
+			false);
 		addOption(option);
 		
 		var option:Option = new Option('Icon Bops:',
@@ -56,7 +61,15 @@ class MiscSettingsSubState extends BaseOptionsMenu
 			'iconBop',
 			'string',
 			'Unknown',
-			['Unknown', 'Psych', 'PFNF',  'OS']);
+			['Unknown', 'Psych', 'PFNF', 'OS', 'Modern']);
+		addOption(option);
+		
+		var option:Option = new Option('Icon Type:',
+			"What type should the icons be?",
+			'iconVer',
+			'string',
+			'MU + Vanilla (Default)',
+			['MU + Vanilla (Default)', 'Mic\'d Up', 'Vanilla']);
 		addOption(option);
 		
 		var option:Option = new Option('Menu Theme:',
@@ -65,6 +78,14 @@ class MiscSettingsSubState extends BaseOptionsMenu
 			'string',
 			'Light',
 			['Light', 'Dark', 'Vanilla', 'Time of Day']);
+		addOption(option);
+		
+		var option:Option = new Option('Language:',
+			'Choose a language to pick.',
+			'langOption',
+			'string',
+			'English',
+			['English', 'French', 'Portuguese']);
 		addOption(option);
 		
 		/*
@@ -79,15 +100,42 @@ class MiscSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeBoyfriendOption;
 		*/
 		
-		/*
-		var option:Option = new Option('Filter:',
-			'Change how colors of the game work,\n either for fun or if you\'re colorblind.',
-			'colorFilter',
+		var option:Option = new Option('Color Filters:',
+			"Change how colors of the game work, either for fun or if you're colorblind.",
+			'colorblindMode',
 			'string',
-			'None',
-			['None', 'Tritanopia', 'Protanopia', 'Deutranopia', 'Virtual Boy', 'Gameboy', ' Downer', 'Grayscale', 'Invert']);
+			'None', 
+			['None', 'Deuteranopia', 'Protanopia', 'Tritanopia']);
+		option.onChange = ColorblindFilters.applyFiltersOnGame;
 		addOption(option);
-		*/
+		
+		var option:Option = new Option('ProjectFNF Modifiers',
+			"",
+			'',
+			'string',
+			'', 
+			['']);
+		addOption(option);
+		
+		var option:Option = new Option('Damage from Opponent Notes', // Name
+			'How much health will the opponent reduce by hitting a note', // Description
+			'damageFromOpponentNotes', // Save data variable name
+			'float', // Variable type
+			0); // Default value
+		option.displayFormat = "%v%";
+		option.scrollSpeed = 3.3;
+		option.minValue = 0.0;
+		option.maxValue = 10.0;
+		option.changeValue = 0.1;
+		option.decimals = 1;
+		addOption(option);
+
+		var option:Option = new Option('Opponent Notes Can Kill', // Name
+			'If checked, damage from opponent notes can be lethal.', // Description
+			'opponentNotesCanKill', // Save data variable name
+			'bool', // Variable type
+			false); // Default value
+		addOption(option);
 		super();
 	}
 

@@ -34,6 +34,13 @@ class VisualsUISubState extends BaseOptionsMenu
 		title = 'Visuals and UI';
 		rpcTitle = 'Visuals & UI Settings Menu'; //for Discord Rich Presence
 
+		var option:Option = new Option('Disable Inital Options',
+			"If checked, disables the options menu when game starts.",
+			'noInitialOption',
+			'bool',
+			false);
+		addOption(option);
+		
 		var option:Option = new Option('Note Splashes',
 			"If unchecked, hitting \"Sick!\" notes won't show particles.",
 			'noteSplashes',
@@ -62,6 +69,27 @@ class VisualsUISubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 		
+		var option:Option = new Option('Striped Health Bar',
+			'Like in OS Engine, health bar has stripes on it.',
+			'stripedBar',
+			'bool',
+			false);
+		addOption(option);
+		
+		var option:Option = new Option('Disable Caching',
+			"If checked, data does not cache when game starts.",
+			'disableCache',
+			'bool',
+			false);
+		addOption(option);
+		
+		var option:Option = new Option('Show Time Of Day',
+			"If checked, shows the current time of day.",
+			'showTimeOfDay',
+			'bool',
+			false);
+		addOption(option);
+		
 		var option:Option = new Option('Time Bar:',
 			"What should the Time Bar display?",
 			'timeBarType',
@@ -70,12 +98,20 @@ class VisualsUISubState extends BaseOptionsMenu
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
 		
-		var option:Option = new Option('HUD Type:',
-			"What type should the HUD be?",
+		var option:Option = new Option('Score Text Type:',
+			"Select a type of score text.",
 			'scoreTxtType',
 			'string',
-			'Default',
-			['Default', 'Simple', 'Advanced', 'Disabled']);
+			'Redux New',
+			['Redux New', 'Redux Classic', 'Simple', 'Advanced', 'Andromeda', 'Forever', 'Leather', 'PFNF Legacy', 'PFNF 2.0', 'Only Score', 'Disabled']);
+		addOption(option);
+		
+		var option:Option = new Option('HUD Type:',
+			"Select a HUD type. This blocks out customizable score text types.",
+			'hudType',
+			'string',
+			'Redux',
+			['Redux', 'Psych']);
 		addOption(option);
 		
 		var option:Option = new Option('Lane Underlay Opacity',
@@ -123,6 +159,15 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.decimals = 1;
 		addOption(option);
 		
+		
+		var option:Option = new Option('Health Bar:',
+			"How should the Health Bar be positioned?",
+			'healthBarType',
+			'string',
+			'Horizontal',
+			['Vertical (Left)', 'Vertical (Right)', 'Horizontal', 'Disabled']);
+		addOption(option);
+		
 		#if !mobile
 		var option:Option = new Option('FPS Counter',
 			'If unchecked, hides FPS Counter.',
@@ -138,7 +183,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'pauseMusic',
 			'string',
 			'Tea Time',
-			['None', 'Breakfast', 'Tea Time', 'Psync']);
+			['None', 'Breakfast', 'Tea Time', 'Psync', 'Flying High', 'Thrillseeker']);
 		addOption(option);
 		option.onChange = onChangePauseMusic;
 		

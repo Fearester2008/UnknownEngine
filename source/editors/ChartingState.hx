@@ -2,6 +2,7 @@ package editors;
 
 #if desktop
 import Discord.DiscordClient;
+import lime.app.Application;
 #end
 import flash.geom.Rectangle;
 import haxe.Json;
@@ -1696,6 +1697,7 @@ class ChartingState extends MusicBeatState
 
 			if (FlxG.keys.justPressed.BACKSPACE) {
 				PlayState.chartingMode = false;
+				Application.current.window.title = "Friday Night Funkin': Unknown Engine 2.0";
 				MusicBeatState.switchState(new editors.MasterEditorMenu());
 				FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				FlxG.mouse.visible = false;

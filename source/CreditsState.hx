@@ -31,6 +31,7 @@ class CreditsState extends MusicBeatState
 
 	var bg:FlxSprite;
 	var descText:FlxText;
+	var serverText:FlxText;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
 	var descBox:AttachedSprite;
@@ -81,21 +82,21 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
-			['Unknown Engine'],
-			['LeonGamer',			'leongamer',		'Main Programmer of Unknown Engine',							'https://twitter.com/LeonGamerPS4',	'279ADC'],
-			['nglmadison',			'maddy',			'Main Co-Developer of Unknown Engine',							'https://twitter.com/nglmadison',	'279ADC'],
-			['Felix75',				'leongamer',		'Assistant Programmer',		 									'https://twitter.com/_felixwastaken_', '279ADC'],
-			['aegislash81',			'aegislash',		'Additional Programmer',										'https://www.tiktok.com/@aegislash81',	'279ADC'],
+			['Unknown Engine Team'],
+			['LeonGamer',			'leongamer',		'Main Programmer of Unknown Engine',							'https://twitter.com/LeonGamerPS4',	'00D5FF'],
+			['QoTz',				'leongamer',		'The Co-Developer of Unknown Engine',							'https://twitter.com/UmbraFromTDS',	'00FF5E'],
+			['CStriker',			'leongamer',		'Assistant Programmer of Unknown Engine',		 				'https://twitter.com/C97Mystical', '00ABEF'],
+			['AshishXMC',			'ashish',		"Main Artist of Unknown Engine",								'https://twitter.com/AshishX9', '833FF4'],
 			[''],
 			['UE Contributors'],
 			['ItJforJadeppn',		'jadeppn',			'Dark Mode and Rest Mode',										'https://www.twitter.com/Plasmapea6',	'279ADC'],
 			[''],
-			['Psych Engine'],
+			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],
 			['RiverOaken',			'river',			'Main Artist/Animator of Psych Engine',							'https://twitter.com/RiverOaken',		'B42F71'],
 			['shubs',				'shubs',			'Additional Programmer of Psych Engine',						'https://twitter.com/yoshubs',			'5E99DF'],
 			[''],
-			['Former Engine Members'],
+			['Former PE Members'],
 			['bb-panzu',			'bb',				'Ex-Programmer of Psych Engine',								'https://twitter.com/bbsub3',			'3E813A'],
 			[''],
 			['Engine Contributors'],
@@ -163,6 +164,11 @@ class CreditsState extends MusicBeatState
 		//descText.borderSize = 2.4;
 		descBox.sprTracker = descText;
 		add(descText);
+		
+		serverText = new FlxText(0, FlxG.height - 18, 0, "Press [CTRL] to access the Discord Server!", 16);
+		serverText.setFormat(Paths.font("vcr.ttf"), 15, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		serverText.scrollFactor.set();
+		add(serverText);
 
 		bg.color = getCurrentBGColor();
 		intendedColor = bg.color;
@@ -188,6 +194,7 @@ class CreditsState extends MusicBeatState
 
 				var upP = controls.UI_UP_P;
 				var downP = controls.UI_DOWN_P;
+				var ctrl = FlxG.keys.justPressed.CONTROL;
 
 				if (upP)
 				{
@@ -198,6 +205,10 @@ class CreditsState extends MusicBeatState
 				{
 					changeSelection(shiftMult);
 					holdTime = 0;
+				}
+				if (ctrl)
+				{
+				CoolUtil.browserLoad('https://discord.gg/zWNH9QJSJU');
 				}
 
 				if(controls.UI_DOWN || controls.UI_UP)

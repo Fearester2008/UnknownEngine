@@ -80,7 +80,7 @@ class ModsMenuState extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
 
-		noModsTxt = new FlxText(0, 0, FlxG.width, "NO MODS INSTALLED\nPRESS BACK TO EXIT AND INSTALL A MOD", 48);
+		noModsTxt = new FlxText(0, 0, FlxG.width, "No mods found!\nPress back to exit and install a mod.", 48);
 		if(FlxG.random.bool(0.1)) noModsTxt.text += '\nBITCH.'; //meanie
 		noModsTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		noModsTxt.scrollFactor.set();
@@ -270,7 +270,6 @@ class ModsMenuState extends MusicBeatState
 		setAllLabelsOffset(installButton, 2, 24);
 		add(installButton);
 		startX -= 180;
-
 		removeButton = new FlxButton(startX, 620, "Delete Selected Mod", function()
 		{
 			var path = haxe.io.Path.join([Paths.mods(), modsList[curSelected][0]]);
@@ -280,7 +279,6 @@ class ModsMenuState extends MusicBeatState
 				try
 				{
 					FileSystem.deleteFile(path); //FUCK YOU HAXE WHY DONT YOU WORK WAAAAAAAAAAAAH
-
 					var icon = mods[curSelected].icon;
 					var alphabet = mods[curSelected].alphabet;
 					remove(icon);
@@ -289,7 +287,6 @@ class ModsMenuState extends MusicBeatState
 					alphabet.destroy();
 					modsList.remove(modsList[curSelected]);
 					mods.remove(mods[curSelected]);
-
 					if(curSelected >= mods.length) --curSelected;
 					changeSelection();
 				}
@@ -656,17 +653,14 @@ class ModsMenuState extends MusicBeatState
 		_file.browse([zipFilter]);
 		canExit = false;
 	}
-
 	function onLoadComplete(_):Void
 	{
 		_file.removeEventListener(Event.SELECT, onLoadComplete);
 		_file.removeEventListener(Event.CANCEL, onLoadCancel);
 		_file.removeEventListener(IOErrorEvent.IO_ERROR, onLoadError);
-
 		var fullPath:String = null;
 		@:privateAccess
 		if(_file.__path != null) fullPath = _file.__path;
-
 		if(fullPath != null)
 		{
 			var rawZip:String = File.getContent(fullPath);
@@ -686,7 +680,6 @@ class ModsMenuState extends MusicBeatState
 		canExit = true;
 		trace("File couldn't be loaded! Wtf?");
 	}
-
 	function onLoadCancel(_):Void
 	{
 		_file.removeEventListener(Event.SELECT, onLoadComplete);
@@ -696,7 +689,6 @@ class ModsMenuState extends MusicBeatState
 		canExit = true;
 		trace("Cancelled file loading.");
 	}
-
 	function onLoadError(_):Void
 	{
 		_file.removeEventListener(Event.SELECT, onLoadComplete);

@@ -1,1 +1,501 @@
-{"song":{"player1":"bf-car","song":"High","player2":"mom-car","notes":[{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[[3840,-1,"Kill Henchmen","",""]],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[[19200,-1,"Kill Henchmen","",""]],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[[34560,-1,"Kill Henchmen","",""]],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[[65280,-1,"Kill Henchmen","",""]],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[[80640,-1,"Kill Henchmen","",""]],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":false},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[[96000,-1,"Kill Henchmen","",""]],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"lengthInSteps":16,"sectionNotes":[],"mustHitSection":true},{"sectionNotes":[],"typeOfSection":0,"lengthInSteps":16,"altAnim":false,"mustHitSection":true,"changeBPM":false,"bpm":125},{"sectionNotes":[],"typeOfSection":0,"lengthInSteps":16,"altAnim":false,"mustHitSection":true,"changeBPM":false,"bpm":125},{"sectionNotes":[],"typeOfSection":0,"lengthInSteps":16,"altAnim":false,"mustHitSection":true,"changeBPM":false,"bpm":125},{"sectionNotes":[],"typeOfSection":0,"lengthInSteps":16,"altAnim":false,"mustHitSection":true,"changeBPM":false,"bpm":125},{"sectionNotes":[],"typeOfSection":0,"lengthInSteps":16,"altAnim":false,"mustHitSection":true,"changeBPM":false,"bpm":125},{"sectionNotes":[],"typeOfSection":0,"lengthInSteps":16,"altAnim":false,"mustHitSection":true,"changeBPM":false,"bpm":125},{"lengthInSteps":16,"altAnim":false,"typeOfSection":0,"sectionNotes":[],"bpm":125,"changeBPM":false,"mustHitSection":true}],"needsVoices":true,"validScore":true,"bpm":125,"speed":2}}
+{
+	"song": {
+		"events": [
+			[
+				4500,
+				[
+					[
+						"Play Animation",
+						"pre-attack",
+						"BF"
+					]
+				]
+			],
+			[
+				4800,
+				[
+					[
+						"Hey!",
+						"BF",
+						""
+					]
+				]
+			],
+			[
+				25200,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				27600,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				30000,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				32400,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				34800,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				37200,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				39600,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				42000,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				43200,
+				[
+					[
+						"Play Animation",
+						"hey-alt",
+						"BF"
+					],
+					[
+						"Kill Henchmen",
+						"",
+						""
+					]
+				]
+			],
+			[
+				44400,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				46800,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				49200,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				51000,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				51600,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				52200,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				54000,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				56400,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				58800,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				61200,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				62400,
+				[
+					[
+						"Kill Henchmen",
+						"",
+						""
+					]
+				]
+			],
+			[
+				63000,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				63600,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				64200,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				65400,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				66000,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				66600,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				67800,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				68400,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				69000,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				70200,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				70800,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				71400,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				73200,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				75600,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				78000,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				80400,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				81600,
+				[
+					[
+						"Play Animation",
+						"hey-alt",
+						"BF"
+					],
+					[
+						"Kill Henchmen",
+						"",
+						""
+					]
+				]
+			],
+			[
+				89400,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				90000,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				90600,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				92400,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				94800,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				97200,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				99600,
+				[
+					[
+						"Add Camera Zoom",
+						"",
+						""
+					]
+				]
+			],
+			[
+				100800,
+				[
+					[
+						"Hey!",
+						"BFGF",
+						""
+					],
+					[
+						"Kill Henchmen",
+						"",
+						""
+					]
+				]
+			],
+			[
+				110400,
+				[
+					[
+						"Kill Henchmen",
+						"",
+						""
+					]
+				]
+			]
+		]
+	}
+}

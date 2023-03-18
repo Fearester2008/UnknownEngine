@@ -41,6 +41,7 @@ class Cache extends FlxState
 	public static var bitmapData2:Map<String,FlxGraphic>;
 	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 1, 0xFFAA00AA);
 	var splash:FlxSprite;
+	var loadingSpeen:FlxSprite;
 	var text:FlxText;
 	var randomTxt:FlxText;
 	
@@ -64,7 +65,7 @@ class Cache extends FlxState
 		super.create();
 		
 
-		splash = new FlxSprite().loadGraphic(Paths.image("titlelogo"));
+		splash = new FlxSprite().loadGraphic(Paths.image("UELogo-LS"));
 		splash.screenCenter();
 		splash.y -= 30;
 		splash.antialiasing = true;
@@ -84,14 +85,21 @@ class Cache extends FlxState
 		randomTxt.setFormat("VCR OSD Mono", 26, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(randomTxt);
 		
-		text = new FlxText(200, 630, 0, "Loading...");
-		text.setFormat("VCR OSD Mono", 20, FlxColor.WHITE, RIGHT);
+		loadingSpeen = new FlxSprite().loadGraphic(Paths.image("loadin"));
+		loadingSpeen.screenCenter(X);
+		loadingSpeen.y = Math.ffloor(splash.y + splash.height + 45);
+		loadingSpeen.angularVelocity = 180;
+		loadingSpeen.antialiasing = true;
+		add(loadingSpeen);
+		
+		text = new FlxText(200, 730, 0, "LOADING...");
+		text.setFormat("VCR OSD Mono", 40, FlxColor.WHITE, RIGHT);
 		text.updateHitbox();
 		text.screenCenter(X);
 		text.x = Math.ffloor(text.x);
 		text.y = Math.ffloor(splash.y + splash.height + 45);
 		text.antialiasing = true;
-		add(text);
+		//add(text);
 		
 
 

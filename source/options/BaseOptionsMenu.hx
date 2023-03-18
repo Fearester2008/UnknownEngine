@@ -175,16 +175,23 @@ class BaseOptionsMenu extends MusicBeatSubstate
 	{
 		checker.x -= 0.21;
 		checker.y -= 0.51;
-		if (controls.UI_UP_P)
-		{
+		//controls.hx is being fucky soooo
+		var down = FlxG.keys.justPressed.DOWN;
+		var up = FlxG.keys.justPressed.UP;
+		var left = FlxG.keys.justPressed.LEFT;
+		var right = FlxG.keys.justPressed.RIGHT;
+		var enter = FlxG.keys.justPressed.ENTER;
+		var penis = FlxG.keys.justPressed.BACKSPACE || FlxG.keys.justPressed.ESCAPE;
+		var reset = FlxG.keys.justPressed.R;
+		
+		if (up) {
 			changeSelection(-1);
 		}
-		if (controls.UI_DOWN_P)
-		{
+		if (down) {
 			changeSelection(1);
 		}
 
-		if (controls.BACK) {
+		if (penis) {
 			close();
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 		}
@@ -199,7 +206,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 			if(usesCheckbox)
 			{
-				if(controls.ACCEPT)
+				if(enter)
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					curOption.setValue((curOption.getValue() == true) ? false : true);
@@ -207,13 +214,13 @@ class BaseOptionsMenu extends MusicBeatSubstate
 					reloadCheckboxes();
 				}
 			} else {
-				if(controls.UI_LEFT || controls.UI_RIGHT) {
-					var pressed = (controls.UI_LEFT_P || controls.UI_RIGHT_P);
+				if(left || right) {
+					var pressed = (left || right);
 					if(holdTime > 0.5 || pressed) {
 						if(pressed) {
 							var add:Dynamic = null;
 							if(curOption.type != 'string') {
-								add = controls.UI_LEFT ? -curOption.changeValue : curOption.changeValue;
+								add = left ? -curOption.changeValue : curOption.changeValue;
 							}
 
 							switch(curOption.type)
@@ -236,7 +243,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 								case 'string':
 									var num:Int = curOption.curOption; //lol
-									if(controls.UI_LEFT_P) --num;
+									if(left) --num;
 									else num++;
 
 									if(num < 0) {
@@ -253,7 +260,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 							curOption.change();
 							FlxG.sound.play(Paths.sound('scrollMenu'));
 						} else if(curOption.type != 'string') {
-							holdValue += curOption.scrollSpeed * elapsed * (controls.UI_LEFT ? -1 : 1);
+							holdValue += curOption.scrollSpeed * elapsed * (left ? -1 : 1);
 							if(holdValue < curOption.minValue) holdValue = curOption.minValue;
 							else if (holdValue > curOption.maxValue) holdValue = curOption.maxValue;
 
@@ -273,12 +280,12 @@ class BaseOptionsMenu extends MusicBeatSubstate
 					if(curOption.type != 'string') {
 						holdTime += elapsed;
 					}
-				} else if(controls.UI_LEFT_R || controls.UI_RIGHT_R) {
+				} else { //if(controls.UI_LEFT_R || controls.UI_RIGHT_R) {
 					clearHold();
 				}
 			}
 
-			if(controls.RESET)
+			if(reset)
 			{
 				for (i in 0...optionsArray.length)
 				{
@@ -377,7 +384,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			boyfriend.destroy();
 		}
 
-		boyfriend = new Character(840, 170, 'bf', true);
+		boyfriend = new Character(840, 170, 'bf-tzen', true);
 		boyfriend.setGraphicSize(Std.int(boyfriend.width * 0.75));
 		boyfriend.updateHitbox();
 		boyfriend.dance();

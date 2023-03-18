@@ -10,10 +10,16 @@ class ClientPrefs {
 	public static var downScroll:Bool = false;
 	public static var middleScroll:Bool = false;
 	public static var bfAltVersion:String = 'Normal';
+	public static var langOption:String = 'English';
+	public static var showMsText:Bool = false;
+	public static var colorblindMode:String = 'None';
 	public static var opponentStrums:Bool = true;
+	public static var stripedBar:Bool = false;
 	public static var showFPS:Bool = true;
+	public static var fpsRain:Bool = false;
  	public static var menuTheme:String = 'Light';
 	public static var iconBop:String = 'Unknown';
+	public static var iconVer:String = 'MU + Vanilla (Default)';
 	public static var removePerfs:Bool = false;
 	public static var randomText:Bool = true;
 	public static var flashing:Bool = true;
@@ -25,6 +31,9 @@ class ClientPrefs {
 	public static var cursing:Bool = true;
 	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;
+	public static var disableCache:Bool = false;
+	public static var noInitialOption:Bool = false;
+	public static var showTimeOfDay:Bool = false;
 	public static var hideHud:Bool = false;
 	public static var hideWatermark:Bool = false;
 	public static var hideJudgements:Bool = false;
@@ -33,9 +42,10 @@ class ClientPrefs {
 	public static var imagesPersist:Bool = false;
 	public static var ghostTapping:Bool = true;
 	public static var timeBarType:String = 'Time Left';
-	public static var scoreTxtType:String = 'Default';
+	public static var scoreTxtType:String = 'Redux New';
+	public static var hudType:String = 'Redux';
 	public static var laneUnderlayOpacity:Float = 0;
-	//public static var loadScreen:String = 'Default';
+	public static var noteSkin:String = 'Default';
 	public static var scoreZoom:Bool = true;
 	public static var noReset:Bool = false;
 	public static var healthBarAlpha:Float = 1;
@@ -62,7 +72,9 @@ class ClientPrefs {
 		'instakill' => false,
 		'practice' => false,
 		'botplay' => false,
-		'opponentplay' => false
+		'opponentplay' => false,
+		'startinghealth' => 0.5,
+		'maxhealth' => 1
 	];
 
 	public static var comboOffset:Array<Int> = [0, 0, 0, 0];
@@ -72,6 +84,13 @@ class ClientPrefs {
 	public static var goodWindow:Int = 90;
 	public static var badWindow:Int = 135;
 	public static var safeFrames:Float = 10;
+	
+	//ProjectFNF
+	public static var damageFromOpponentNotes:Float = 0;
+	public static var opponentNotesCanKill:Bool = false;
+	public static var healthBarType:String = 'Horizontal';
+	public static var scoreSystem:String = 'Vanilla';
+	public static var accuracySystem:String = 'Psych';
 
 	//Every key has two binds, add your key bind down here and then add your control on options/ControlsSubState.hx and Controls.hx
 	public static var keyBinds:Map<String, Array<FlxKey>> = [
@@ -109,10 +128,16 @@ class ClientPrefs {
 		FlxG.save.data.downScroll = downScroll;
 		FlxG.save.data.middleScroll = middleScroll;
 		FlxG.save.data.bfAltVersion = bfAltVersion;
+		FlxG.save.data.langOption = langOption;
+		FlxG.save.data.showMsText = showMsText;
+		FlxG.save.data.colorblindMode = colorblindMode;
 		FlxG.save.data.opponentStrums = opponentStrums;	
+		FlxG.save.data.stripedBar = stripedBar;
 		FlxG.save.data.showFPS = showFPS;
+		FlxG.save.data.fpsRain = fpsRain;
 		FlxG.save.data.menuTheme = menuTheme;
 		FlxG.save.data.iconBop = iconBop;
+		FlxG.save.data.iconVer = iconVer;
 		FlxG.save.data.removePerfs = removePerfs;
 		FlxG.save.data.randomText = randomText;
 		FlxG.save.data.flashing = flashing;
@@ -124,6 +149,9 @@ class ClientPrefs {
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
 		FlxG.save.data.camZooms = camZooms;
+		FlxG.save.data.disableCache = disableCache;
+		FlxG.save.data.noInitialOption = noInitialOption;
+		FlxG.save.data.showTimeOfDay = showTimeOfDay;
 		FlxG.save.data.noteOffset = noteOffset;
 		FlxG.save.data.hideHud = hideHud;
 		FlxG.save.data.hideWatermark = hideWatermark;
@@ -133,8 +161,9 @@ class ClientPrefs {
 		FlxG.save.data.ghostTapping = ghostTapping;
 		FlxG.save.data.timeBarType = timeBarType;
 		FlxG.save.data.scoreTxtType = scoreTxtType;
+		FlxG.save.data.hudType = hudType;
 		FlxG.save.data.laneUnderlayOpacity = laneUnderlayOpacity;
-		//FlxG.save.data.loadScreen = loadScreen;
+		FlxG.save.data.noteSkin = noteSkin;
 		FlxG.save.data.scoreZoom = scoreZoom;
 		FlxG.save.data.noReset = noReset;
 		FlxG.save.data.healthBarAlpha = healthBarAlpha;
@@ -154,6 +183,12 @@ class ClientPrefs {
 		FlxG.save.data.pauseMusic = pauseMusic;
 		FlxG.save.data.checkForUpdates = checkForUpdates;
 		FlxG.save.data.comboStacking = comboStacking;
+		
+		FlxG.save.data.damageFromOpponentNotes = damageFromOpponentNotes;
+		FlxG.save.data.opponentNotesCanKill = opponentNotesCanKill;
+		FlxG.save.data.healthBarType = healthBarType;
+		FlxG.save.data.scoreSystem = scoreSystem;
+		FlxG.save.data.accuracySystem = accuracySystem;
 	
 		FlxG.save.flush();
 
@@ -171,11 +206,23 @@ class ClientPrefs {
 		if(FlxG.save.data.middleScroll != null) {
 			middleScroll = FlxG.save.data.middleScroll;
 		}
-		if(FlxG.save.data.bfAltVersion!= null) {
+		if(FlxG.save.data.bfAltVersion != null) {
 			bfAltVersion = FlxG.save.data.bfAltVersion;
+		}
+		if(FlxG.save.data.langOption!= null) {
+			langOption = FlxG.save.data.langOption;
+		}
+		if(FlxG.save.data.showMsText!= null) {
+			showMsText = FlxG.save.data.showMsText;
+		}
+		if(FlxG.save.data.colorblindMode!= null) {
+			colorblindMode = FlxG.save.data.colorblindMode;
 		}
 		if(FlxG.save.data.opponentStrums != null) {
 			opponentStrums = FlxG.save.data.opponentStrums;
+		}
+		if(FlxG.save.data.stripedBar != null) {
+			stripedBar = FlxG.save.data.stripedBar;
 		}
 		if(FlxG.save.data.showFPS != null) {
 			showFPS = FlxG.save.data.showFPS;
@@ -183,11 +230,17 @@ class ClientPrefs {
 				Main.fpsVar.visible = showFPS;
 			}
 		}
+		if(FlxG.save.data.fpsRain != null) {
+			fpsRain = FlxG.save.data.fpsRain;
+		}
 		if(FlxG.save.data.menuTheme != null) {
 			menuTheme = FlxG.save.data.menuTheme;
 		}
 		if(FlxG.save.data.iconBop != null) {
 			iconBop = FlxG.save.data.iconBop;
+		}
+		if(FlxG.save.data.iconVer != null) {
+			iconVer = FlxG.save.data.iconVer;
 		}
 		if(FlxG.save.data.removePerfs != null) {
 			removePerfs = FlxG.save.data.removePerfs;
@@ -229,6 +282,15 @@ class ClientPrefs {
 		if(FlxG.save.data.camZooms != null) {
 			camZooms = FlxG.save.data.camZooms;
 		}
+		if(FlxG.save.data.disableCache != null) {
+			disableCache = FlxG.save.data.disableCache;
+		}
+		if(FlxG.save.data.noInitialOption != null) {
+			noInitialOption = FlxG.save.data.noInitialOption;
+		}
+		if(FlxG.save.data.showTimeOfDay != null) {
+			showTimeOfDay = FlxG.save.data.showTimeOfDay;
+		}
 		if(FlxG.save.data.hideHud != null) {
 			hideHud = FlxG.save.data.hideHud;
 		}
@@ -253,12 +315,15 @@ class ClientPrefs {
 		if(FlxG.save.data.scoreTxtType != null) {
 			scoreTxtType = FlxG.save.data.scoreTxtType;
 		}
+		if(FlxG.save.data.hudType != null) {
+			hudType = FlxG.save.data.hudType;
+		}
 		if (FlxG.save.data.laneUnderlayOpacity != null) {
 			laneUnderlayOpacity = FlxG.save.data.laneUnderlayOpacity;
 		}
-		/*if(FlxG.save.data.loadScreen != null) {
-			loadScreen = FlxG.save.data.loadScreen;
-		}*/
+		if(FlxG.save.data.noteSkin != null) {
+			noteSkin = FlxG.save.data.noteSkin;
+		}
 		if(FlxG.save.data.scoreZoom != null) {
 			scoreZoom = FlxG.save.data.scoreZoom;
 		}
@@ -307,6 +372,21 @@ class ClientPrefs {
 				gameplaySettings.set(name, value);
 			}
 		}
+		if(FlxG.save.data.damageFromOpponentNotes != null) {
+			damageFromOpponentNotes = FlxG.save.data.damageFromOpponentNotes;
+		}
+		if(FlxG.save.data.opponentNotesCanKill != null) {
+			opponentNotesCanKill = FlxG.save.data.opponentNotesCanKill;
+		}
+		if(FlxG.save.data.healthBarType != null) {
+			healthBarType = FlxG.save.data.healthBarType;
+		}
+		if(FlxG.save.data.scoreSystem != null) {
+			scoreSystem = FlxG.save.data.scoreSystem;
+		}
+		if(FlxG.save.data.accuracySystem != null) {
+			accuracySystem = FlxG.save.data.accuracySystem;
+		}
 		
 		// flixel automatically saves your volume!
 		if(FlxG.save.data.volume != null)
@@ -323,6 +403,13 @@ class ClientPrefs {
 		}
 		if (FlxG.save.data.comboStacking != null)
 			comboStacking = FlxG.save.data.comboStacking;
+			
+		if(FlxG.save.data.scoreSystem != null) {
+			scoreSystem = FlxG.save.data.scoreSystem;
+		}
+		if(FlxG.save.data.accuracySystem != null) {
+			accuracySystem = FlxG.save.data.accuracySystem;
+		}
 
 		var save:FlxSave = new FlxSave();
 		save.bind('controls_v2', 'ninjamuffin99');

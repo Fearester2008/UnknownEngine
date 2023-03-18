@@ -2,6 +2,7 @@ package;
 
 #if desktop
 import Discord.DiscordClient;
+import lime.app.Application;
 #end
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -184,15 +185,19 @@ class StoryMenuState extends MusicBeatState
 
 		changeWeek();
 		changeDifficulty();
+		
+		Application.current.window.title = "Friday Night Funkin': Unknown Engine 2.0";
 
 		super.create();
 	}
 
+	/*
 	override function closeSubState() {
 		persistentUpdate = true;
 		changeWeek();
 		super.closeSubState();
 	}
+	*/
 
 	override function update(elapsed:Float)
 	{
@@ -247,7 +252,7 @@ class StoryMenuState extends MusicBeatState
 			if(FlxG.keys.justPressed.CONTROL)
 			{
 				persistentUpdate = false;
-				openSubState(new GameplayChangersSubstate());
+				MusicBeatState.switchState(new ModifiersState());
 			}
 			else if(controls.RESET)
 			{
@@ -265,7 +270,7 @@ class StoryMenuState extends MusicBeatState
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			movedBack = true;
-			MusicBeatState.switchState(new MainMenuState());
+			MusicBeatState.switchState(new PlaySelectionState());
 		}
 
 		super.update(elapsed);

@@ -12,6 +12,10 @@ import openfl.text.TextField;
 
 import openfl.text.TextFormat;
 
+import flixel.math.FlxMath;
+
+import flixel.util.FlxColor;
+
 /**
 	The FPS class provides an easy-to-use monitor to display
 	the current frame rate of an OpenFL project
@@ -43,12 +47,36 @@ class FPS extends TextField
         height = 70;
 
     }
+	
+	var array:Array<FlxColor> = [
+		FlxColor.fromRGB(148, 0, 211),
+		FlxColor.fromRGB(75, 0, 130),
+		FlxColor.fromRGB(0, 0, 255),
+		FlxColor.fromRGB(0, 255, 0),
+		FlxColor.fromRGB(255, 255, 0),
+		FlxColor.fromRGB(255, 127, 0),
+		FlxColor.fromRGB(255, 0, 0)
+	];
 
+	var skippedFrames = 0;
 
+	public static var currentColor = 0;
 
     private function onEnter(_)
 
     {
+		if (ClientPrefs.fpsRain)
+		{
+			if (textColor >= array.length)
+				textColor = 0;
+			textColor = Math.round(FlxMath.lerp(0, array.length, skippedFrames / (ClientPrefs.framerate / 3)));
+			(cast(Lib.current.getChildAt(0), Main)).changeFPSColor(array[textColor]);
+			textColor++;
+			skippedFrames++;
+			if (skippedFrames > (ClientPrefs.framerate / 3))
+				skippedFrames = 0;
+		}
+		
         var now = Timer.stamp();
         times.push(now);
         while (times[0] < now - 1)
@@ -66,7 +94,7 @@ class FPS extends TextField
         if (mem > memPeak) memPeak = mem;
         if (visible)
         {
-            text = "FPS: " + times.length + "\nMemory: " + mem + " MB\nMemory Peak: " + memPeak + " MB\nEngine Version " + MainMenuState.unknownEngineVersion;
+            text = "FPS: " + times.length + "\nMemory: " + mem + " MB\nMem Peak: " + memPeak + " MB\nEngine Version " + MainMenuState.unknownEngineVersion;
         }
     }
 }

@@ -2,6 +2,7 @@ package options;
 
 #if desktop
 import Discord.DiscordClient;
+import lime.app.Application;
 #end
 import flash.text.TextField;
 import flixel.FlxG;
@@ -70,6 +71,7 @@ class OptionsState extends MusicBeatState
 	var selectorRight:Alphabet;
 
 	override function create() {
+		
 		#if desktop
 		DiscordClient.changePresence("Options Menu", null);
 		#end
@@ -89,6 +91,13 @@ class OptionsState extends MusicBeatState
 
 		add(checker);
 		checker.scrollFactor.set(0, 0.07);
+		
+		var side:FlxSprite = new FlxSprite(0).loadGraphic(Paths.image('Options_Side'));
+		side.scrollFactor.x = 0;
+		side.scrollFactor.y = 0;
+		side.antialiasing = true;
+		add(side);
+		side.x = 0;
 
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
@@ -133,6 +142,8 @@ class OptionsState extends MusicBeatState
 		add(selectorLeft);
 		selectorRight = new Alphabet(0, 0, '<', true);
 		add(selectorRight);
+		
+		Application.current.window.title = "Friday Night Funkin': Unknown Engine 2.0 - Options Menu";
 
 		changeSelection();
 		ClientPrefs.saveSettings();
@@ -159,6 +170,7 @@ class OptionsState extends MusicBeatState
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
+			Application.current.window.title = "Friday Night Funkin': Unknown Engine 2.0";
 			if (goToPlayState) {
 				StageData.loadDirectory(PlayState.SONG);
 				goToPlayState = false;

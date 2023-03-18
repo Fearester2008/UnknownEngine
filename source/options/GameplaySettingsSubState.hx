@@ -69,6 +69,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool',
 			true);
 		addOption(option);
+		
+		var option:Option = new Option('Display MS Offset On Note Hits',
+			'If checked, an offset (in milliseconds) will appear near notes.',
+			'showMsText',
+			'bool',
+			false);
+		addOption(option);
 
 		var option:Option = new Option('Remove Perfect! Note Judgement',
 			'If checked, removes Perfect! judgement',

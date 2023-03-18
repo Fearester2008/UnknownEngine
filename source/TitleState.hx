@@ -235,6 +235,9 @@ class TitleState extends MusicBeatState
 			}
 		}
 		#end
+		
+		FlxG.watch.addQuick("beatShit", curBeat);
+		FlxG.watch.addQuick("stepShit", curStep);
 	}
 
 	var logoBl:FlxSprite;
@@ -479,9 +482,11 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		FlxG.watch.addQuick("beatShit", curBeat);
+		FlxG.watch.addQuick("stepShit", curStep);
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
-		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
+        FlxG.camera.zoom = FlxMath.lerp(1, FlxG.camera.zoom, 0.95);
 		
 		Timer += 1;
 		gradientBar.scale.y += Math.sin(Timer / 10) * 0.001;
@@ -544,10 +549,15 @@ class TitleState extends MusicBeatState
 
 				FlxG.camera.flash(ClientPrefs.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
-				if (logo != null) FlxTween.tween(logo, {y: -1500}, 3.2, {ease: FlxEase.expoInOut});
-				if (logoBl != null) FlxTween.tween(logoBl, {y: -1500}, 3.2, {ease: FlxEase.expoInOut});
-				FlxTween.tween(gfDance, {x: -1500}, 3.7, {ease: FlxEase.expoInOut});
-				FlxTween.tween(titleText, {y: 1500}, 3.7, {ease: FlxEase.expoInOut});
+                FlxTween.tween(FlxG.camera, {zoom: 1.04}, 0.2, {ease: FlxEase.cubeInOut, type: ONESHOT, startDelay: 0});
+                FlxTween.tween(FlxG.camera, {zoom: 1}, 0.2, {ease: FlxEase.cubeInOut, type: ONESHOT, startDelay: 0.25});
+				FlxTween.tween(gfDance, {y:2000}, 2.5, {ease: FlxEase.expoInOut});
+				FlxTween.tween(titleText, {y: 2000}, 2.5, {ease: FlxEase.expoInOut});
+				FlxTween.tween(gradientBar, {y: 2000}, 2.5, {ease: FlxEase.expoInOut});
+	        	if (logoBl != null) FlxTween.tween(logoBl, {alpha: 0}, 1.2, {ease: FlxEase.expoInOut});
+				if (logoBl != null) FlxTween.tween(logoBl, {y: 2000}, 2.5, {ease: FlxEase.expoInOut});
+	        	if (logo != null) FlxTween.tween(logo, {alpha: 0}, 1.2, {ease: FlxEase.expoInOut});
+				if (logo != null) FlxTween.tween(logo, {y: 2000}, 2.5, {ease: FlxEase.expoInOut});
 
 				transitioning = true;
 				// FlxG.sound.music.stop();
@@ -628,7 +638,7 @@ class TitleState extends MusicBeatState
 
 		super.update(elapsed);
 	}
-
+	
 	function createCoolText(textArray:Array<String>, ?offset:Float = 0)
 	{
 		for (i in 0...textArray.length)
@@ -640,6 +650,8 @@ class TitleState extends MusicBeatState
 				credGroup.add(money);
 				textGroup.add(money);
 			}
+			money.y -= 350;
+			FlxTween.tween(money, {y: money.y + 350}, 0.5, {ease: FlxEase.expoOut, startDelay: 0.0});
 		}
 	}
 
@@ -651,6 +663,8 @@ class TitleState extends MusicBeatState
 			coolText.y += (textGroup.length * 60) + 200 + offset;
 			credGroup.add(coolText);
 			textGroup.add(coolText);
+			coolText.y += 750;
+		    FlxTween.tween(coolText, {y: coolText.y - 750}, 0.5, {ease: FlxEase.expoOut, startDelay: 0.0});
 		}
 	}
 
@@ -668,13 +682,15 @@ class TitleState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+        if(curBeat % 1 == 0)
+        	FlxG.camera.zoom += 0.025;
 
 		if(logoBl != null)
 			logoBl.animation.play('bump', true);
 			
 		if (logo != null) {
 			logo.scale.set(1.05, 1.05);
-			FlxTween.tween(logo, {'scale.x': 0.95, 'scale.y': 0.95}, 0.1, {ease: FlxEase.bounceIn});
+			FlxTween.tween(logo, {'scale.x': 0.95, 'scale.y': 0.95}, 0.1, {ease: FlxEase.backOut});
 		}
 
 		if(gfDance != null) {
@@ -695,21 +711,24 @@ class TitleState extends MusicBeatState
 					FlxG.sound.music.fadeIn(4, 0, 0.7);
 				case 2:
 					#if PSYCH_WATERMARKS
-					createCoolText(['Unknown Engine by'], 15);
+					createCoolText(['FNF Redux by'], 15);
 					#else
 					createCoolText(['ninjamuffin99', 'phantomArcade', 'kawaisprite', 'evilsk8er']);
 					#end
 				// credTextShit.visible = true;
-				case 4:
+				case 3:
 					#if PSYCH_WATERMARKS
 					addMoreText('LeonGamer', 15);
-					addMoreText('felixwastaken', 15);
-					addMoreText('nglmadison', 15);
+					addMoreText('UmbraFromTDS', 15);
+					addMoreText('C97Mystical', 15);
+					addMoreText('AshishX9', 15);
 					#else
 					addMoreText('present');
 					#end
 				// credTextShit.text += '\npresent...';
 				// credTextShit.addText();
+				case 4:
+					addMoreText('Forked from Psych Engine', 15);
 				case 5:
 					deleteCoolText();
 				// credTextShit.visible = false;
@@ -717,12 +736,13 @@ class TitleState extends MusicBeatState
 				// credTextShit.screenCenter();
 				case 6:
 					#if PSYCH_WATERMARKS
-					createCoolText(['This is a combination of'], -40);
+					createCoolText(['A combination of'], -40);
 					#else
 					createCoolText(['In association', 'with'], -40);
 					#end
+				case 7:
+					addMoreText('These engines below lmao', -40);
 				case 8:
-					addMoreText('These engines right below lol', -40);
 					logoSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
 				case 9:

@@ -34,12 +34,22 @@ class HealthIcon extends FlxSprite
 		else changeIcon('bf');
 	}
 
+	var iconVerPath:String;
 	private var iconOffsets:Array<Float> = [0, 0];
 	public function changeIcon(char:String) {
 		if(this.char != char) {
 			var name:String = 'icons/' + char;
+			/*
+			if(ClientPrefs.iconVer == "Mic'd Up") {
+				iconVerPath = 'mu-new/';
+			}
+			if(ClientPrefs.iconVer == "Vanilla") {
+				iconVerPath = 'vanilla/';
+			}
+			*/
 			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'icons/icon-' + char; //Older versions of psych engine's support
 			if(!Paths.fileExists('images/' + name + '.png', IMAGE)) name = 'icons/icon-face'; //Prevents crash from missing icon
+
 			var file:Dynamic = Paths.image(name);
 
 			loadGraphic(file); //Load stupidly first for getting the file size
