@@ -195,9 +195,6 @@ class MainMenuState extends MusicBeatState
 		randomTxt.visible = !ClientPrefs.randomText;
 		add(randomTxt);
 		
-		FlxG.watch.addQuick("beatShit", curBeat);
-		FlxG.watch.addQuick("stepShit", curStep);
-		
 		bottomPanel.scrollFactor.set();
 
 		camGame.follow(camFollowPos, null, 1);

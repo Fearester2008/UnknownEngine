@@ -80,7 +80,7 @@ class TitleState extends MusicBeatState
 
 	#if TITLE_SCREEN_EASTER_EGG
 	var easterEggKeys:Array<String> = [
-		'SHADOW', 'RIVER', 'SHUBS', 'BBPANZU'
+		'GFSUX', 'BFSUX', 'UESUX'
 	];
 	var allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	var easterEggKeysBuffer:String = '';
@@ -172,18 +172,15 @@ class TitleState extends MusicBeatState
 		if (FlxG.save.data.psychDevsEasterEgg == null) FlxG.save.data.psychDevsEasterEgg = ''; //Crash prevention
 		switch(FlxG.save.data.psychDevsEasterEgg.toUpperCase())
 		{
-			case 'SHADOW':
-				titleJSON.gfx += 210;
-				titleJSON.gfy += 40;
-			case 'RIVER':
-				titleJSON.gfx += 100;
-				titleJSON.gfy += 20;
-			case 'SHUBS':
-				titleJSON.gfx += 160;
-				titleJSON.gfy -= 10;
-			case 'BBPANZU':
-				titleJSON.gfx += 45;
-				titleJSON.gfy += 100;
+			case 'GFSUX':
+				titleJSON.gfx += 0;
+				titleJSON.gfy += 0;
+			case 'BFSUX':
+				titleJSON.gfx += 0;
+				titleJSON.gfy += 0;
+			case 'UESUX':
+				titleJSON.gfx += 0;
+				titleJSON.gfy += 0;
 		}
 		#end
 
@@ -302,22 +299,18 @@ class TitleState extends MusicBeatState
 		switch(easterEgg.toUpperCase())
 		{
 			#if TITLE_SCREEN_EASTER_EGG
-			case 'SHADOW':
-				gfDance.frames = Paths.getSparrowAtlas('ShadowBump');
-				gfDance.animation.addByPrefix('danceLeft', 'Shadow Title Bump', 24);
-				gfDance.animation.addByPrefix('danceRight', 'Shadow Title Bump', 24);
-			case 'RIVER':
-				gfDance.frames = Paths.getSparrowAtlas('RiverBump');
-				gfDance.animation.addByIndices('danceLeft', 'River Title Bump', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
-				gfDance.animation.addByIndices('danceRight', 'River Title Bump', [29, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
-			case 'SHUBS':
-				gfDance.frames = Paths.getSparrowAtlas('ShubBump');
-				gfDance.animation.addByPrefix('danceLeft', 'Shub Title Bump', 24, false);
-				gfDance.animation.addByPrefix('danceRight', 'Shub Title Bump', 24, false);
-			case 'BBPANZU':
-				gfDance.frames = Paths.getSparrowAtlas('BBBump');
-				gfDance.animation.addByIndices('danceLeft', 'BB Title Bump', [14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27], "", 24, false);
-				gfDance.animation.addByIndices('danceRight', 'BB Title Bump', [27, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13], "", 24, false);
+			case 'GFSUX':
+				gfDance.frames = Paths.getSparrowAtlas('GFBump');
+				gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+				gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+			case 'BFSUX':
+				gfDance.frames = Paths.getSparrowAtlas('BFBump');
+				gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+				gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+			case 'UESUX':
+				gfDance.frames = Paths.getSparrowAtlas('UEBump');
+				gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+				gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
 			#end
 
 			default:
@@ -549,6 +542,7 @@ class TitleState extends MusicBeatState
 
 				FlxG.camera.flash(ClientPrefs.flashing ? FlxColor.WHITE : 0x4CFFFFFF, 1);
 				FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+				FlxG.camera.zoom += 0.090;
                 FlxTween.tween(FlxG.camera, {zoom: 1.04}, 0.2, {ease: FlxEase.cubeInOut, type: ONESHOT, startDelay: 0});
                 FlxTween.tween(FlxG.camera, {zoom: 1}, 0.2, {ease: FlxEase.cubeInOut, type: ONESHOT, startDelay: 0.25});
 				FlxTween.tween(gfDance, {y:2000}, 2.5, {ease: FlxEase.expoInOut});
@@ -683,14 +677,14 @@ class TitleState extends MusicBeatState
 	{
 		super.beatHit();
         if(curBeat % 1 == 0)
-        	FlxG.camera.zoom += 0.025;
+        	FlxG.camera.zoom += 0.035;
 
 		if(logoBl != null)
 			logoBl.animation.play('bump', true);
 			
 		if (logo != null) {
 			logo.scale.set(1.05, 1.05);
-			FlxTween.tween(logo, {'scale.x': 0.95, 'scale.y': 0.95}, 0.1, {ease: FlxEase.backOut});
+			FlxTween.tween(logo, {'scale.x': 0.95, 'scale.y': 0.95}, 0.35, {ease: FlxEase.backOut});
 		}
 
 		if(gfDance != null) {
@@ -788,14 +782,12 @@ class TitleState extends MusicBeatState
 				var sound:FlxSound = null;
 				switch(easteregg)
 				{
-					case 'RIVER':
-						sound = FlxG.sound.play(Paths.sound('JingleRiver'));
-					case 'SHUBS':
-						sound = FlxG.sound.play(Paths.sound('JingleShubs'));
-					case 'SHADOW':
-						FlxG.sound.play(Paths.sound('JingleShadow'));
-					case 'BBPANZU':
-						sound = FlxG.sound.play(Paths.sound('JingleBB'));
+					case 'GFSUX':
+						sound = FlxG.sound.play(Paths.sound('JingleAngor'));
+					case 'BFSUX':
+						sound = FlxG.sound.play(Paths.sound('JingleBF'));
+					case 'UESUX':
+						sound = FlxG.sound.play(Paths.sound('JingleUE'));
 
 					default: //Go back to normal ugly ass boring GF
 						remove(logoSpr);
@@ -812,19 +804,39 @@ class TitleState extends MusicBeatState
 				}
 
 				transitioning = true;
-				if(easteregg == 'SHADOW')
+				if(easteregg == 'GFSUX')
 				{
-					new FlxTimer().start(3.2, function(tmr:FlxTimer)
+					new FlxTimer().start(14.5, function(tmr:FlxTimer)
 					{
 						remove(logoSpr);
 						remove(FNF_Logo);
 						remove(UE_Logo);
 						remove(credGroup);
 						FlxG.camera.flash(FlxColor.WHITE, 0.6);
-						transitioning = false;
+						sound.onComplete = function() {
+							FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+							FlxG.sound.music.fadeIn(4, 0, 0.7);
+							transitioning = false;
+						};
 					});
 				}
-				else
+				else if(easteregg == 'UESUX')
+				{
+					new FlxTimer().start(1.0, function(tmr:FlxTimer)
+					{
+						remove(logoSpr);
+						remove(FNF_Logo);
+						remove(UE_Logo);
+						remove(credGroup);
+						FlxG.camera.flash(FlxColor.WHITE, 0.6);
+						sound.onComplete = function() {
+							FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+							FlxG.sound.music.fadeIn(4, 0, 0.7);
+							transitioning = false;
+						};
+					});
+				}
+				else 
 				{
 					remove(logoSpr);
 					remove(FNF_Logo);
@@ -850,16 +862,6 @@ class TitleState extends MusicBeatState
 				var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
 				if (easteregg == null) easteregg = '';
 				easteregg = easteregg.toUpperCase();
-				#if TITLE_SCREEN_EASTER_EGG
-				if(easteregg == 'SHADOW')
-				{
-					FlxG.sound.music.fadeOut();
-					if(FreeplayState.vocals != null)
-					{
-						FreeplayState.vocals.fadeOut();
-					}
-				}
-				#end
 			}
 			skippedIntro = true;
 		}
