@@ -212,7 +212,7 @@ class MainMenuState extends MusicBeatState
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 		#else
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 1250, "This is an unofficial build of UE. \n Do not report any bugs of this build.", 12);
+		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 1250, "This is an unofficial build of UE. \n Do not report any bugs from this build.", 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);

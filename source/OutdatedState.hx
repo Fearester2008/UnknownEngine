@@ -42,7 +42,7 @@ class OutdatedState extends MusicBeatState
 			"Sup bro, looks like you're running an   \n
 			outdated version of Unknown Engine (" + MainMenuState.unknownEngineVersion + "),\n
 			please update to " + TitleState.updateVersion + "!\n
-			//Press ENTER to update.\n
+			Press ENTER to update.\n
 			Press ESCAPE to proceed anyway.\n
 			\n
 			Thank you for using the Engine/Mod!",

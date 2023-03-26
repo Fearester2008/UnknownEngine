@@ -40,6 +40,8 @@ class Main extends Sprite
 		skipSplash: true, // if the default flixel splash screen should be skipped
 		startFullscreen: false // if the game should start at fullscreen mode
 	};
+	
+	public var lastY:Float = 0;
 
 	public static var fpsVar:FPS;
 
@@ -53,7 +55,8 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
-
+		
+		lastY = Application.current.window.y;
 		if (stage != null)
 		{
 			init();
