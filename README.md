@@ -68,11 +68,13 @@ First, you need to install Haxe and HaxeFlixel. I'm too lazy to write and keep u
 Other installations you'd need are the additional libraries, a fully updated list will be in `Project.xml` in the project root. Currently, these are all of the things you need to install:
 ```
 flixel
-flixel-addons
+flixel-addons 2.11.0
 flixel-ui
 hscript
 newgrounds
 ```
+Download 2.11.0 specifically, as the current build does not support it.
+
 So for each of those type `haxelib install [library]` so shit like `haxelib install newgrounds`
 
 You'll also need to install a couple things that involve Gits. To do this, you need to do a few things first.
