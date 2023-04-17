@@ -60,6 +60,10 @@ same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, 
 * Kade Engine - Circle Note Skin
 * Mind Games - Chip and Future Note Skins
 * Stilic - Freeplay Bump, Max Optimization, Menu Animations - https://github.com/ShadowMario/FNF-PsychEngine/pull/1809
+* R_ - Title screen GF shit
+* Chino's Animated - Title screen GF shit
+* ZERO ANIMATION - Title screen GF shit
+* YokuTzen - High x Boyfriend & Fresh (Boyfriend Remix) BF skin
 
 <p align="center">
 	<a href="https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/intrologo.png" target="_blank"><img src="/assets/preload/images/intrologo.png"></a>
