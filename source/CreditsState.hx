@@ -84,12 +84,18 @@ class CreditsState extends MusicBeatState
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			['Unknown Engine Team'],
 			['LeonGamer',			'leongamer',		'Main Programmer of Unknown Engine',							'https://twitter.com/LeonGamerPS4',	'00D5FF'],
-			['QoTz',				'leongamer',		'The Co-Developer of Unknown Engine',							'https://twitter.com/UmbraFromTDS',	'00FF5E'],
-			['CStriker',			'leongamer',		'Assistant Programmer of Unknown Engine',		 				'https://twitter.com/C97Mystical', '00ABEF'],
-			['AshishXMC',			'ashish',		"Main Artist of Unknown Engine",								'https://twitter.com/AshishX9', '833FF4'],
+			['QoTz',				'twatz',		'The Co-Developer of Unknown Engine',							'https://twitter.com/UmbraFromTDS',	'00FF5E'],
+			['CStriker',			'charles',		'Assistant Programmer of Unknown Engine',		 				'https://twitter.com/C97Mystical', '00ABEF'],
+			['MaddelynZ',			'madi',		'Assistant Developer of Unknown Engine',		 				'https://twitter.com/nglmadison', '00ABEF'],
+			['AshishXMC',			'ashish',			"Main Artist of Unknown Engine",								'https://twitter.com/AshishX9', '833FF4'],
 			[''],
+			/*
 			['UE Contributors'],
 			['ItJforJadeppn',		'jadeppn',			'Dark Mode and Rest Mode',										'https://www.twitter.com/Plasmapea6',	'279ADC'],
+			[''],
+			*/
+			['Special Thanks'],
+			['Stilic',				'placeholder',		'Freeplay Bump, Max Optimization',								'https://github.com/ShadowMario/FNF-PsychEngine/pull/1809',		'31b0d1'],
 			[''],
 			['Psych Engine Team'],
 			['Shadow Mario',		'shadowmario',		'Main Programmer of Psych Engine',								'https://twitter.com/Shadow_Mario_',	'444444'],

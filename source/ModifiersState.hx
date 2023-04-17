@@ -155,7 +155,6 @@ class ModifiersState extends MusicBeatState
 
 		add(checker);
 		checker.scrollFactor.set(0.07, 0.07);
-				
 
 		side.scrollFactor.x = 0;
 		side.scrollFactor.y = 0;
@@ -163,6 +162,31 @@ class ModifiersState extends MusicBeatState
 		side.screenCenter();
 		add(side);
 		side.y = FlxG.height - side.height;
+		
+		if(ClientPrefs.menuTheme == 'Dark') {
+			bg.loadGraphic(Paths.image('menuDark'));
+			checker.visible = false;
+			gradientBar.visible = false;
+		}
+		
+		if(ClientPrefs.menuTheme == 'Vanilla') {
+			bg.loadGraphic(Paths.image('menuBGBlueV'));
+			checker.visible = false;
+			gradientBar.visible = false;
+		}
+		
+		if(ClientPrefs.menuTheme == 'Time of Day') {
+            var hours:Int = Date.now().getHours();
+            if(hours > 18) {
+                bg.loadGraphic(Paths.image('menuDark'));
+				checker.visible = false;
+				gradientBar.visible = false;
+            } else if(hours > 8) {
+                bg.loadGraphic(Paths.image('modiBG_Main'));
+				checker.visible = true;
+				gradientBar.visible = true;
+            }
+        }
 
 		// avoids lagspikes while scrolling through menus!
 		grpOptions = new FlxTypedGroup<Alphabet>();

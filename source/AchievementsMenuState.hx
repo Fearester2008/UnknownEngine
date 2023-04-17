@@ -38,11 +38,8 @@ class AchievementsMenuState extends MusicBeatState
 		#end
 
 		var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuBGBlue'));
-		menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
-		menuBG.updateHitbox();
-		menuBG.screenCenter();
-		menuBG.antialiasing = ClientPrefs.globalAntialiasing;
 		add(menuBG);
+		menuBG.screenCenter();
 
 		gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x00ff0000, 0x558DE7E5, 0xAAE6F0A9], 1, 90, true);
 		gradientBar.y = FlxG.height - gradientBar.height;
@@ -53,7 +50,7 @@ class AchievementsMenuState extends MusicBeatState
 		checker.scrollFactor.set(0, 0.07);
 		
 		if(ClientPrefs.menuTheme == 'Dark') {
-			menuBG.loadGraphic(Paths.image('menuBGDarkO'));
+			menuBG.loadGraphic(Paths.image('menuDarkOptions'));
 			checker.visible = false;
 			gradientBar.visible = false;
 		}
@@ -67,13 +64,11 @@ class AchievementsMenuState extends MusicBeatState
 		if(ClientPrefs.menuTheme == 'Time of Day') {
             var hours:Int = Date.now().getHours();
             if(hours > 18) {
-                menuBG.loadGraphic(Paths.image('menuBGDarkO'));
+                menuBG.loadGraphic(Paths.image('menuDarkOptions'));
 				checker.visible = false;
-				gradientBar.visible = false;
             } else if(hours > 8) {
                 menuBG.loadGraphic(Paths.image('menuBGBlue'));
 				checker.visible = true;
-				gradientBar.visible = true;
             }
         }
 

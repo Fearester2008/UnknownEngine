@@ -22,7 +22,6 @@ class FirstTimeState extends MusicBeatState
 	var warnText:FlxText;
 	
 	public static var leftState:Bool = false;
-	public static var isNotFirstTime:Bool = false;
 	
 	override function create()
 	{
@@ -59,13 +58,16 @@ class FirstTimeState extends MusicBeatState
 		if (FlxG.keys.justPressed.ENTER)
 		{
 			leftState = true;			
-			FirstCheckState.firstTime = false;
-			isNotFirstTime = true;
+			ClientPrefs.firstTime = false;
 			trace('gameng tiem');
 			FlxG.sound.play(Paths.sound('confirmMenu'));
 			FlxFlicker.flicker(warnText, 1, 0.1, false, true, function(flk:FlxFlicker) {
 			new FlxTimer().start(0.5, function (tmr:FlxTimer) {
-			MusicBeatState.switchState(new Cache());
+			#if desktop
+			FlxG.switchState(new Cache());
+			#else
+			FlxG.switchState(new TitleState());
+			#end
 			});
 		  });
 		}

@@ -139,6 +139,29 @@ class MainMenuState extends MusicBeatState
 		side.x = -500;
 		side.y = -90;
 		add(side);
+		
+		if(ClientPrefs.menuTheme == 'Dark') {
+			bg.loadGraphic(Paths.image('menuDark'));
+			checker.visible = false;
+		}
+		
+		if(ClientPrefs.menuTheme == 'Vanilla') {
+			bg.loadGraphic(Paths.image('menuBGVanilla'));
+			checker.visible = false;
+			gradientBar.visible = false;
+			beef.visible = false;
+		}
+		
+		if(ClientPrefs.menuTheme == 'Time of Day') {
+            var hours:Int = Date.now().getHours();
+            if(hours > 18) {
+                bg.loadGraphic(Paths.image('menuDark'));
+				checker.visible = false;
+            } else if(hours > 8) {
+                bg.loadGraphic(Paths.image('mBG_Main'));
+				checker.visible = true;
+            }
+        }
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);

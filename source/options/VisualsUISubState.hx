@@ -33,13 +33,15 @@ class VisualsUISubState extends BaseOptionsMenu
 	{
 		title = 'Visuals and UI';
 		rpcTitle = 'Visuals & UI Settings Menu'; //for Discord Rich Presence
-
+		
+		/*
 		var option:Option = new Option('Disable Inital Options',
 			"If checked, disables the options menu when game starts.",
 			'noInitialOption',
 			'bool',
 			false);
 		addOption(option);
+		*/
 		
 		var option:Option = new Option('Note Splashes',
 			"If unchecked, hitting \"Sick!\" notes won't show particles.",
@@ -76,19 +78,14 @@ class VisualsUISubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 		
-		var option:Option = new Option('Disable Caching',
-			"If checked, data does not cache when game starts.",
-			'disableCache',
-			'bool',
-			false);
-		addOption(option);
-		
+		/*
 		var option:Option = new Option('Show Time Of Day',
 			"If checked, shows the current time of day.",
 			'showTimeOfDay',
 			'bool',
 			false);
 		addOption(option);
+		*/
 		
 		var option:Option = new Option('Time Bar:',
 			"What should the Time Bar display?",
@@ -106,6 +103,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			['Redux New', 'Redux Classic', 'Simple', 'Advanced', 'Andromeda', 'Forever', 'Leather', 'PFNF Legacy', 'PFNF 2.0', 'Only Score', 'Disabled']);
 		addOption(option);
 		
+		/*
 		var option:Option = new Option('HUD Type:',
 			"Select a HUD type. This blocks out customizable score text types.",
 			'hudType',
@@ -113,6 +111,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'Redux',
 			['Redux', 'Psych']);
 		addOption(option);
+		*/
 		
 		var option:Option = new Option('Lane Underlay Opacity',
 			'How opaque should be a black underlay for note lanes.',
@@ -159,7 +158,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.decimals = 1;
 		addOption(option);
 		
-		
+		/*
 		var option:Option = new Option('Health Bar:',
 			"How should the Health Bar be positioned?",
 			'healthBarType',
@@ -167,6 +166,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'Horizontal',
 			['Vertical (Left)', 'Vertical (Right)', 'Horizontal', 'Disabled']);
 		addOption(option);
+		*/
 		
 		#if !mobile
 		var option:Option = new Option('FPS Counter',

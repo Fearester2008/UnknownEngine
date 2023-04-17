@@ -73,9 +73,8 @@ class NotesSubState extends MusicBeatSubstate
 		
 		
 		if(ClientPrefs.menuTheme == 'Dark') {
-			bg.loadGraphic(Paths.image('menuBGDarkO'));
+			bg.loadGraphic(Paths.image('menuDarkOptions'));
 			checker.visible = false;
-			gradientBar.visible = false;
 		}
 		
 		if(ClientPrefs.menuTheme == 'Vanilla') {
@@ -87,13 +86,11 @@ class NotesSubState extends MusicBeatSubstate
 		if(ClientPrefs.menuTheme == 'Time of Day') {
             var hours:Int = Date.now().getHours();
             if(hours > 18) {
-                bg.loadGraphic(Paths.image('menuBGDarkO'));
+                bg.loadGraphic(Paths.image('menuDarkOptions'));
 				checker.visible = false;
-				gradientBar.visible = false;
             } else if(hours > 8) {
                 bg.loadGraphic(Paths.image('menuOption'));
 				checker.visible = true;
-				gradientBar.visible = true;
             }
         }
 		

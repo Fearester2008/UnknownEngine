@@ -36,7 +36,7 @@ class OptionsState extends MusicBeatState
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
-	static var goToPlayState:Bool = false;
+	public static var goToPlayState:Bool = false;
 	
 	var checker:FlxBackdrop = new FlxBackdrop(Paths.image('checkerOption'), 0.2, 0.2, true, true);
 	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 300, 0xFFAA00AA);
@@ -73,7 +73,7 @@ class OptionsState extends MusicBeatState
 	override function create() {
 		
 		#if desktop
-		DiscordClient.changePresence("Options Menu", null);
+		DiscordClient.changePresence("In the Options Menu", null);
 		#end
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuOption'));
@@ -98,32 +98,25 @@ class OptionsState extends MusicBeatState
 		side.antialiasing = true;
 		add(side);
 		side.x = 0;
-
-		grpOptions = new FlxTypedGroup<Alphabet>();
-		add(grpOptions);
 		
 		if(ClientPrefs.menuTheme == 'Dark') {
-			bg.loadGraphic(Paths.image('menuBGDarkO'));
+			bg.loadGraphic(Paths.image('menuDarkOptions'));
 			checker.visible = false;
-			gradientBar.visible = false;
 		}
 		
 		if(ClientPrefs.menuTheme == 'Vanilla') {
 			bg.loadGraphic(Paths.image('menuDesat'));
 			checker.visible = false;
-			gradientBar.visible = false;
 		}
 		
 		if(ClientPrefs.menuTheme == 'Time of Day') {
             var hours:Int = Date.now().getHours();
             if(hours > 18) {
-                bg.loadGraphic(Paths.image('menuBGDarkO'));
+                bg.loadGraphic(Paths.image('menuDarkOptions'));
 				checker.visible = false;
-				gradientBar.visible = false;
             } else if(hours > 8) {
                 bg.loadGraphic(Paths.image('menuOption'));
 				checker.visible = true;
-				gradientBar.visible = true;
             }
         }
 
@@ -182,6 +175,10 @@ class OptionsState extends MusicBeatState
 
 		if (controls.ACCEPT) {
 			openSelectedSubstate(options[curSelected]);
+		}
+		
+		if (FlxG.keys.justPressed.RIGHT) {
+			LoadingState.loadAndSwitchState(new options.OptionsStateP2());
 		}
 	}
 	

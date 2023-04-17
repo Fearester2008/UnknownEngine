@@ -77,6 +77,31 @@ class PlaySelectionState extends MusicBeatState
 		side.screenCenter();
 		add(side);
 		side.y = FlxG.height - side.height/3*2;
+		
+		if(ClientPrefs.menuTheme == 'Dark') {
+			bg.loadGraphic(Paths.image('menuDark'));
+			checker.visible = false;
+			gradientBar.visible = false;
+		}
+		
+		if(ClientPrefs.menuTheme == 'Vanilla') {
+			bg.loadGraphic(Paths.image('menuBGVanilla'));
+			checker.visible = false;
+			gradientBar.visible = false;
+		}
+		
+		if(ClientPrefs.menuTheme == 'Time of Day') {
+            var hours:Int = Date.now().getHours();
+            if(hours > 18) {
+                bg.loadGraphic(Paths.image('menuDark'));
+				checker.visible = false;
+				gradientBar.visible = false;
+            } else if(hours > 8) {
+                bg.loadGraphic(Paths.image('pBG_Main'));
+				checker.visible = true;
+				gradientBar.visible = true;
+            }
+        }
 
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);

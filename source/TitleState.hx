@@ -69,6 +69,10 @@ class TitleState extends MusicBeatState
 	var UE_Logo:FlxSprite;
 	var logoSpr:FlxSprite;
 	
+	var updateAlphabet:FlxText;
+	var updateIcon:FlxSprite;
+	var updateRibbon:FlxSprite;
+	
 	var titleTextColors:Array<FlxColor> = [0xFF33FFFF, 0xFF3333CC];
 	var titleTextAlphas:Array<Float> = [1, .64];
 
@@ -80,15 +84,15 @@ class TitleState extends MusicBeatState
 
 	#if TITLE_SCREEN_EASTER_EGG
 	var easterEggKeys:Array<String> = [
-		'GFSUX', 'BFSUX', 'UESUX'
+		'GFSUX', 'BFSUX', 'UESUX', 'CNNTENBFS'
 	];
-	var allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+	var allowedKeys:String = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
 	var easterEggKeysBuffer:String = '';
 	#end
 
 	var mustUpdate:Bool = false;
 
-	var titleJSON:TitleData;
+	public static var titleJSON:TitleData;
 
 	public static var updateVersion:String = '';
 
@@ -136,9 +140,9 @@ class TitleState extends MusicBeatState
 		super.create();
 
 		FlxG.save.bind('funkin', 'ninjamuffin99');
-
+		
 		ClientPrefs.loadPrefs();
-
+		
 		#if CHECK_FOR_UPDATES
 		if(ClientPrefs.checkForUpdates && !closedState) {
 			trace('checking for update');
@@ -181,6 +185,9 @@ class TitleState extends MusicBeatState
 			case 'UESUX':
 				titleJSON.gfx += 0;
 				titleJSON.gfy += 0;
+			case 'CNNTENBFS':
+				titleJSON.gfx += 0;
+				titleJSON.gfy += 0;
 		}
 		#end
 
@@ -205,28 +212,41 @@ class TitleState extends MusicBeatState
 		MusicBeatState.switchState(new FreeplayState());
 		#elseif CHARTING
 		MusicBeatState.switchState(new ChartingState());
-		#elseif desktop
-		if (!DiscordClient.isInitialized)
-		{
-			DiscordClient.initialize();
-			Application.current.onExit.add (function (exitCode) {
-				DiscordClient.shutdown();
-			});
-		}
-
-		if (initialized)
-			startIntro();
-		else
-		{
-			new FlxTimer().start(1, function(tmr:FlxTimer)
+		#else
+		if(ClientPrefs.firstTime && !FirstTimeState.leftState) {
+			FlxTransitionableState.skipNextTransIn = true;
+			FlxTransitionableState.skipNextTransOut = true;
+			MusicBeatState.switchState(new FirstTimeState());
+		} else if(!ClientPrefs.firstTime && !ClientPrefs.disableCache && !Cache.leftState) {
+			FlxTransitionableState.skipNextTransIn = true;
+			FlxTransitionableState.skipNextTransOut = true;
+			MusicBeatState.switchState(new Cache());
+		} else if(!ClientPrefs.firstTime && ClientPrefs.disableCache && Cache.leftState) {
+			FlxTransitionableState.skipNextTransIn = true;
+			FlxTransitionableState.skipNextTransOut = true;
+			MusicBeatState.switchState(new TitleState());
+		} else {
+			#if desktop
+			if (!DiscordClient.isInitialized)
 			{
+				DiscordClient.initialize();
+				Application.current.onExit.add (function (exitCode) {
+					DiscordClient.shutdown();
+				});
+			}
+			#end
+
+			if (initialized)
 				startIntro();
-			});
+			else
+			{
+				new FlxTimer().start(1, function(tmr:FlxTimer)
+				{
+					startIntro();
+				});
+			}
 		}
 		#end
-		
-		FlxG.watch.addQuick("beatShit", curBeat);
-		FlxG.watch.addQuick("stepShit", curStep);
 	}
 
 	var logoBl:FlxSprite;
@@ -303,6 +323,11 @@ class TitleState extends MusicBeatState
 				gfDance.frames = Paths.getSparrowAtlas('UEBump');
 				gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
 				gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+			case 'CNNTENBFS':
+				gfDance.frames = Paths.getSparrowAtlas('AnchorBump');
+				gfDance.animation.addByIndices('danceLeft', 'gfDance', [30, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14], "", 24, false);
+				gfDance.animation.addByIndices('danceRight', 'gfDance', [15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29], "", 24, false);
+
 			#end
 
 			default:
@@ -435,6 +460,29 @@ class TitleState extends MusicBeatState
 		logoSpr.antialiasing = ClientPrefs.globalAntialiasing;
 
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
+		
+		FlxG.mouse.visible = true;
+		
+		updateRibbon = new FlxSprite(0, FlxG.height - 75).makeGraphic(FlxG.width, 75, 0x88000000, true);
+		updateRibbon.visible = false;
+		updateRibbon.alpha = 0;
+		add(updateRibbon);
+
+		updateIcon = new FlxSprite(FlxG.width - 75, FlxG.height - 95).loadGraphic(Paths.image("loadin"));
+		updateIcon.angularVelocity = 180;
+		updateIcon.setGraphicSize(65);
+		updateIcon.updateHitbox();
+		updateIcon.antialiasing = true;
+		updateIcon.visible = false;
+		add(updateIcon);
+
+		updateAlphabet = new FlxText(0, 0, FlxG.width, "Checking for updates...", 20);
+		updateAlphabet.setFormat(Paths.font("vcr"), 20, FlxColor.WHITE);
+		updateAlphabet.visible = false;
+		updateAlphabet.x = updateIcon.x - updateAlphabet.width - 10;
+		updateAlphabet.y = updateIcon.y;
+		add(updateAlphabet);
+		updateIcon.y += 15;
 
 		if (initialized)
 			skipIntro();
@@ -544,6 +592,7 @@ class TitleState extends MusicBeatState
 				if (logoBl != null) FlxTween.tween(logoBl, {y: 2000}, 2.5, {ease: FlxEase.expoInOut});
 	        	if (logo != null) FlxTween.tween(logo, {alpha: 0}, 1.2, {ease: FlxEase.expoInOut});
 				if (logo != null) FlxTween.tween(logo, {y: 2000}, 2.5, {ease: FlxEase.expoInOut});
+				Cache.leftState = true;
 
 				transitioning = true;
 				// FlxG.sound.music.stop();
@@ -574,7 +623,7 @@ class TitleState extends MusicBeatState
 						var word:String = wordRaw.toUpperCase(); //just for being sure you're doing it right
 						if (easterEggKeysBuffer.contains(word))
 						{
-							//trace('YOOO! ' + word);
+							trace('YOOO! ' + word);
 							if (FlxG.save.data.psychDevsEasterEgg == word)
 								FlxG.save.data.psychDevsEasterEgg = '';
 							else
@@ -707,6 +756,7 @@ class TitleState extends MusicBeatState
 					addMoreText('LeonGamer', 15);
 					addMoreText('UmbraFromTDS', 15);
 					addMoreText('C97Mystical', 15);
+					addMoreText('nglmadison', 15);
 					addMoreText('AshishX9', 15);
 					#else
 					addMoreText('present');
@@ -780,6 +830,8 @@ class TitleState extends MusicBeatState
 						sound = FlxG.sound.play(Paths.sound('JingleBF'));
 					case 'UESUX':
 						sound = FlxG.sound.play(Paths.sound('JingleUE'));
+					case 'CNNTENBFS':
+						sound = FlxG.sound.play(Paths.sound('JingleAnchor'));
 
 					default: //Go back to normal ugly ass boring GF
 						remove(logoSpr);
@@ -812,9 +864,9 @@ class TitleState extends MusicBeatState
 						};
 					});
 				}
-				else if(easteregg == 'UESUX')
+				else if(easteregg == 'CNNTENBFS')
 				{
-					new FlxTimer().start(1.0, function(tmr:FlxTimer)
+					new FlxTimer().start(0, function(tmr:FlxTimer)
 					{
 						remove(logoSpr);
 						remove(FNF_Logo);
@@ -822,7 +874,7 @@ class TitleState extends MusicBeatState
 						remove(credGroup);
 						FlxG.camera.flash(FlxColor.WHITE, 0.6);
 						sound.onComplete = function() {
-							FlxG.sound.playMusic(Paths.music('freakyMenu'), 0);
+							FlxG.sound.playMusic(Paths.music('flyingHigh'), 0);
 							FlxG.sound.music.fadeIn(4, 0, 0.7);
 							transitioning = false;
 						};

@@ -31,9 +31,6 @@ using StringTools;
 
 class BaseOptionsMenu extends MusicBeatSubstate
 {
-	var checker:FlxBackdrop = new FlxBackdrop(Paths.image('checkerOption'), 0.2, 0.2, true, true);
-	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 300, 0xFFAA00AA);
-	
 	private var curOption:Option = null;
 	private var curSelected:Int = 0;
 	private var optionsArray:Array<Option>;
@@ -48,7 +45,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 	public var title:String;
 	public var rpcTitle:String;
-
+	
+	var checker:FlxBackdrop = new FlxBackdrop(Paths.image('checkerOption'), 0.2, 0.2, true, true);
+	
 	public function new()
 	{
 		super();
@@ -66,36 +65,33 @@ class BaseOptionsMenu extends MusicBeatSubstate
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
 		
+		var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 300, 0xFFAA00AA);
 		gradientBar = FlxGradient.createGradientFlxSprite(Math.round(FlxG.width), 512, [0x00ff0000, 0x558DE7E5, 0xAAE6F0A9], 1, 90, true);
 		gradientBar.y = FlxG.height - gradientBar.height;
 		add(gradientBar);
 		gradientBar.scrollFactor.set(0, 0);
-
+	
 		add(checker);
 		checker.scrollFactor.set(0, 0.07);
 		
 		if(ClientPrefs.menuTheme == 'Dark') {
-			bg.loadGraphic(Paths.image('menuBGDarkO'));
+			bg.loadGraphic(Paths.image('menuDarkOptions'));
 			checker.visible = false;
-			gradientBar.visible = false;
 		}
-
+		
 		if(ClientPrefs.menuTheme == 'Vanilla') {
 			bg.loadGraphic(Paths.image('menuDesat'));
 			checker.visible = false;
-			gradientBar.visible = false;
 		}
 		
 		if(ClientPrefs.menuTheme == 'Time of Day') {
             var hours:Int = Date.now().getHours();
             if(hours > 18) {
-                bg.loadGraphic(Paths.image('menuBGDarkO'));
+                bg.loadGraphic(Paths.image('menuDarkOptions'));
 				checker.visible = false;
-				gradientBar.visible = false;
             } else if(hours > 8) {
                 bg.loadGraphic(Paths.image('menuOption'));
 				checker.visible = true;
-				gradientBar.visible = true;
             }
         }
 
@@ -173,25 +169,18 @@ class BaseOptionsMenu extends MusicBeatSubstate
 	var holdValue:Float = 0;
 	override function update(elapsed:Float)
 	{
-		checker.x -= 0.21;
-		checker.y -= 0.51;
-		//controls.hx is being fucky soooo
-		var down = FlxG.keys.justPressed.DOWN;
-		var up = FlxG.keys.justPressed.UP;
-		var left = FlxG.keys.justPressed.LEFT;
-		var right = FlxG.keys.justPressed.RIGHT;
-		var enter = FlxG.keys.justPressed.ENTER;
-		var penis = FlxG.keys.justPressed.BACKSPACE || FlxG.keys.justPressed.ESCAPE;
-		var reset = FlxG.keys.justPressed.R;
+		checker.x -= 0.21; checker.y -= 0.51;
 		
-		if (up) {
+		if (controls.UI_UP_P)
+		{
 			changeSelection(-1);
 		}
-		if (down) {
+		if (controls.UI_DOWN_P)
+		{
 			changeSelection(1);
 		}
 
-		if (penis) {
+		if (controls.BACK) {
 			close();
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 		}
@@ -206,7 +195,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 			if(usesCheckbox)
 			{
-				if(enter)
+				if(controls.ACCEPT)
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					curOption.setValue((curOption.getValue() == true) ? false : true);
@@ -214,13 +203,13 @@ class BaseOptionsMenu extends MusicBeatSubstate
 					reloadCheckboxes();
 				}
 			} else {
-				if(left || right) {
-					var pressed = (left || right);
+				if(controls.UI_LEFT || controls.UI_RIGHT) {
+					var pressed = (controls.UI_LEFT_P || controls.UI_RIGHT_P);
 					if(holdTime > 0.5 || pressed) {
 						if(pressed) {
 							var add:Dynamic = null;
 							if(curOption.type != 'string') {
-								add = left ? -curOption.changeValue : curOption.changeValue;
+								add = controls.UI_LEFT ? -curOption.changeValue : curOption.changeValue;
 							}
 
 							switch(curOption.type)
@@ -243,7 +232,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 
 								case 'string':
 									var num:Int = curOption.curOption; //lol
-									if(left) --num;
+									if(controls.UI_LEFT_P) --num;
 									else num++;
 
 									if(num < 0) {
@@ -260,7 +249,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 							curOption.change();
 							FlxG.sound.play(Paths.sound('scrollMenu'));
 						} else if(curOption.type != 'string') {
-							holdValue += curOption.scrollSpeed * elapsed * (left ? -1 : 1);
+							holdValue += curOption.scrollSpeed * elapsed * (controls.UI_LEFT ? -1 : 1);
 							if(holdValue < curOption.minValue) holdValue = curOption.minValue;
 							else if (holdValue > curOption.maxValue) holdValue = curOption.maxValue;
 
@@ -280,12 +269,12 @@ class BaseOptionsMenu extends MusicBeatSubstate
 					if(curOption.type != 'string') {
 						holdTime += elapsed;
 					}
-				} else { //if(controls.UI_LEFT_R || controls.UI_RIGHT_R) {
+				} else if(controls.UI_LEFT_R || controls.UI_RIGHT_R) {
 					clearHold();
 				}
 			}
 
-			if(reset)
+			if(controls.RESET)
 			{
 				for (i in 0...optionsArray.length)
 				{
@@ -384,7 +373,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			boyfriend.destroy();
 		}
 
-		boyfriend = new Character(840, 170, 'bf-tzen', true);
+		boyfriend = new Character(840, 170, 'bf', true);
 		boyfriend.setGraphicSize(Std.int(boyfriend.width * 0.75));
 		boyfriend.updateHitbox();
 		boyfriend.dance();

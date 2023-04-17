@@ -50,6 +50,8 @@ class Cache extends FlxState
 
 	var images = [];
 	var music = [];
+	
+	public static var leftState:Bool = false;
 
 	override function create()
 	{
@@ -172,6 +174,7 @@ class Cache extends FlxState
 
 		#end
 		FlxG.switchState(new TitleState());
+		leftState = true;
 	}
 	
 	function changeText()

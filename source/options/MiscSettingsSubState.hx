@@ -35,26 +35,28 @@ class MiscSettingsSubState extends BaseOptionsMenu
 		rpcTitle = 'Miscellaneous Settings Menu'; //for Discord Rich Presence
 		
 		var option:Option = new Option('Note Skin:',
-			"Based on Mind Games, how should they look like?",
+			"What should the notes look like?",
 			'noteSkin',
 			'string',
 			'Default',
 			['Default', 'Circle', 'Future', 'Chip']);
 		addOption(option);
 		
-		var option:Option = new Option('Disable Menu Text',
-			"If checked, text at the bottom of menu will be disabled.",
-			'randomText',
+		var option:Option = new Option('Disable Caching',
+			"If checked, data does not cache when game starts.",
+			'disableCache',
 			'bool',
-			true);
+			false);
 		addOption(option);
 		
+		/*
 		var option:Option = new Option('Rainbow FPS Counter',
 			"Rainbow FPS Counter. Why not?",
 			'fpsRain',
 			'bool',
 			false);
 		addOption(option);
+		*/
 		
 		var option:Option = new Option('Icon Bops:',
 			"What type should icon bopping be?",
@@ -64,6 +66,7 @@ class MiscSettingsSubState extends BaseOptionsMenu
 			['Unknown', 'Psych', 'PFNF', 'OS', 'Modern']);
 		addOption(option);
 		
+		/*
 		var option:Option = new Option('Icon Type:',
 			"What type should the icons be?",
 			'iconVer',
@@ -72,23 +75,6 @@ class MiscSettingsSubState extends BaseOptionsMenu
 			['MU + Vanilla (Default)', 'Mic\'d Up', 'Vanilla']);
 		addOption(option);
 		
-		var option:Option = new Option('Menu Theme:',
-			'What theme should the menu be?',
-			'menuTheme',
-			'string',
-			'Light',
-			['Light', 'Dark', 'Vanilla', 'Time of Day']);
-		addOption(option);
-		
-		var option:Option = new Option('Language:',
-			'Choose a language to pick.',
-			'langOption',
-			'string',
-			'English',
-			['English', 'French', 'Portuguese']);
-		addOption(option);
-		
-		/*
 		var option:Option = new Option('BF Version:',
 			"What BF should be used in gameplay?",
 			'bfAltVersion',

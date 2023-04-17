@@ -2,7 +2,7 @@
 	<a href="https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/UELogo-LS.png" target="_blank"><img src="/assets/preload/images/UELogo-LS.png"></a>
 </p>
 
-# This is the repository for Friday Night Funkin': Unknown Engine, an engine built off of [Psych Engine.](https://github.com/ShadowMario/FNF-PsychEngine)
+# This is the repository for Friday Night Funkin': Unknown Engine, a fork of [Psych Engine.](https://github.com/ShadowMario/FNF-PsychEngine)
 
 Support Funkin' on [Newgrounds](https://www.newgrounds.com/portal/view/770371), [GitHub](https://github.com/ninjamuffin99/Funkin), and [Itch.io](https://ninja-muffin24.itch.io/funkin)!
  
@@ -16,11 +16,14 @@ to start you off, disabling Videos should be simple, simply Delete the line `"VI
 
 same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, this and other customization options are all available within the `Project.xml` file
 
-## Credits
+# Credits
 * LeonGamer - Coding for Unknown Engine
 * UmbraFromTDS - Co-Developer of Unknown Engine
 * C97Mystical - Assistant Coding
+* nglmadison - Assistant Developer
 * AshishXMC - Arts for Unknown Engine
+
+* [Hydra](https://www.youtube.com/channel/UCEnQefrHAncXQtU4f5jloCA) - [Gettin' Freaky (Main Menu theme) remix](https://youtu.be/26jLVUkV5ew)
 
 ## Psych Engine
 * Shadow Mario - Coding for Psych Engine
@@ -32,7 +35,19 @@ same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, 
 * KadeDev - Additional Programmer
 * Ash237 - Additional Programmer
 
+## ProjectFNF:
+* [@l1ttleO](https://github.com/l1ttleO) - Main developer of ProjectFNF 2.0
+* [@MagnusStrom](https://github.com/MagnusStrom) - Original maintainer of ProjectFNF 1.0
+* [@aflacc](https://github.com/aflacc) - Original author of ProjectFNF
+* [@tr1zn](https://github.com/Tr1zn) - Beta testing
+
+## OS Engine:
+* [weuz_](https://github.com/notweuz) - Coding
+* [nelifs](https://github.com/nelifs) - Coding and Design
+* [Cooljer](https://github.com/cooljer) - Arts
+
 ### Special Thanks
+* magnumsrtisswag - Stage Editor - https://github.com/ShadowMario/FNF-PsychEngine/pull/6354
 * xenkap - Flare Engine Menu + Funny Pause Menu texts
 * shubs - New Input System
 * SqirraRNG - Chart Editor's Sound Waveform base code
@@ -42,6 +57,9 @@ same goes for *Lua Scripts*, comment out or delete the line with `LUA_ALLOWED`, 
 * Smokey - Spritemap Texture Atlas support
 * Cary - OG Resolution code
 * Nebula_Zorua - VCR Shader code
+* Kade Engine - Circle Note Skin
+* Mind Games - Chip and Future Note Skins
+* Stilic - Freeplay Bump, Max Optimization, Menu Animations - https://github.com/ShadowMario/FNF-PsychEngine/pull/1809
 
 <p align="center">
 	<a href="https://github.com/LeonGamerPS4/UnknownEngine/blob/main/assets/preload/images/intrologo.png" target="_blank"><img src="/assets/preload/images/intrologo.png"></a>

@@ -97,9 +97,8 @@ class ControlsSubState extends MusicBeatSubstate {
 		side.x = 0;
 		
 		if(ClientPrefs.menuTheme == 'Dark') {
-			bg.loadGraphic(Paths.image('menuBGDarkO'));
+			bg.loadGraphic(Paths.image('menuDarkOptions'));
 			checker.visible = false;
-			gradientBar.visible = false;
 		}
 		
 		if(ClientPrefs.menuTheme == 'Vanilla') {
@@ -107,18 +106,17 @@ class ControlsSubState extends MusicBeatSubstate {
 			bg.loadGraphic(Paths.image('menuDesat'));
 			checker.visible = false;
 			gradientBar.visible = false;
+			side.visible = false;
 		}
 		
 		if(ClientPrefs.menuTheme == 'Time of Day') {
             var hours:Int = Date.now().getHours();
             if(hours > 18) {
-                bg.loadGraphic(Paths.image('menuBGDarkO'));
+                bg.loadGraphic(Paths.image('menuDarkOptions'));
 				checker.visible = false;
-				gradientBar.visible = false;
             } else if(hours > 8) {
                 bg.loadGraphic(Paths.image('cBG_Main'));
 				checker.visible = true;
-				gradientBar.visible = true;
             }
         }
 
