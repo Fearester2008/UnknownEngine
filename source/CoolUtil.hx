@@ -23,8 +23,7 @@ class CoolUtil
 		'Normal',
 		'Hard',
 		'Expert',
-		'Insane',
-		'Master'
+		'Insane'
 	];
 	public static var defaultDifficulty:String = 'Normal'; //The chart that has no suffix and starting difficulty on Freeplay/Story Mode
 
