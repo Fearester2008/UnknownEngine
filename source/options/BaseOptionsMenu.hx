@@ -46,7 +46,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 	public var title:String;
 	public var rpcTitle:String;
 	
-	var checker:FlxBackdrop = new FlxBackdrop(Paths.image('checkerOption'), 0.2, 0.2, true, true);
+	var checker:FlxBackdrop = new FlxBackdrop(Paths.image('checkerOption'), XY, 20,20);
 	
 	public function new()
 	{
