@@ -36,7 +36,7 @@ class OptionsStateP2 extends MusicBeatState
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
 	
-	var checker:FlxBackdrop = new FlxBackdrop(Paths.image('checkerOption'), XY, 20,20);
+	var checker:FlxBackdrop = new FlxBackdrop(Paths.image('checkerOption'), 0.2,0.2 , true,true);
 	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 300, 0xFFAA00AA);
 
 	function openSelectedSubstate(label:String) {
